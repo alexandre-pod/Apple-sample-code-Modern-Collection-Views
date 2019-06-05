@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -140,8 +140,8 @@
 		573612CB22A1CDA800671B03 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = "Conference-Mac-Diffable/Base.lproj/SectionHeadersFootersWindow.xib"; sourceTree = SOURCE_ROOT; };
 		573612CD22A1CDA900671B03 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = "Conference-Mac-Diffable/Base.lproj/TwoColumnWindow.xib"; sourceTree = SOURCE_ROOT; };
 		5777C884229910E100AEF7BB /* MountainsRawData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MountainsRawData.swift; sourceTree = "<group>"; };
-		A35C0120A35BF12000000001 /* SampleCode.xcconfig */ = {isa = PBXFileReference; name = SampleCode.xcconfig; path = Configuration/SampleCode.xcconfig; sourceTree = "<group>"; };
-		A36F28F0A36F27C000000001 /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE.txt; sourceTree = "<group>"; };
+		DBD17F70DBD3070000000001 /* SampleCode.xcconfig */ = {isa = PBXFileReference; name = SampleCode.xcconfig; path = Configuration/SampleCode.xcconfig; sourceTree = "<group>"; };
+		DBD9EC60DBD9EAB000000001 /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE.txt; sourceTree = "<group>"; };
 		FD09E6D32276BC250009D23B /* SectionHeadersFootersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeadersFootersViewController.swift; sourceTree = "<group>"; };
 		FD09E6D52276BF030009D23B /* PinnedSectionHeaderFooterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinnedSectionHeaderFooterViewController.swift; sourceTree = "<group>"; };
 		FD1BB0A6225F9257003ADF88 /* OutlineItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlineItemCell.swift; sourceTree = "<group>"; };
@@ -304,18 +304,18 @@
 			path = "xib Files";
 			sourceTree = "<group>";
 		};
-		A35BA4F0A35BA48000000001 /* Configuration */ = {
+		DBD18690DBD1865000000001 /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
-				A35C0120A35BF12000000001 /* SampleCode.xcconfig */,
+				DBD17F70DBD3070000000001 /* SampleCode.xcconfig */,
 			);
 			name = Configuration;
 			sourceTree = "<group>";
 		};
-		A36E0740A36E070000000001 /* LICENSE */ = {
+		DBD9A350DBD9C0F000000001 /* LICENSE */ = {
 			isa = PBXGroup;
 			children = (
-				A36F28F0A36F27C000000001 /* LICENSE.txt */,
+				DBD9EC60DBD9EAB000000001 /* LICENSE.txt */,
 			);
 			name = LICENSE;
 			path = LICENSE;
@@ -431,8 +431,8 @@
 				053A00A822837E6E00C5D56F /* Conference-Mac-Diffable */,
 				FDA8D138225F8531000127E1 /* Products */,
 				FD9671C52268F1FC00301EBB /* Frameworks */,
-				A35BA4F0A35BA48000000001 /* Configuration */,
-				A36E0740A36E070000000001 /* LICENSE */,
+				DBD18690DBD1865000000001 /* Configuration */,
+				DBD9A350DBD9C0F000000001 /* LICENSE */,
 			);
 			sourceTree = "<group>";
 		};
@@ -521,7 +521,7 @@
 				};
 			};
 			buildConfigurationList = FDA8D132225F8531000127E1 /* Build configuration list for PBXProject "Conference-Diffable" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 11.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -838,7 +838,7 @@
 /* Begin XCBuildConfiguration section */
 		053A00B222837E6F00C5D56F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A35C0120A35BF12000000001 /* SampleCode.xcconfig */;
+			baseConfigurationReference = DBD17F70DBD3070000000001 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Conference-Mac-Diffable/Conference_Mac_Diffable.entitlements";
@@ -863,7 +863,7 @@
 		};
 		053A00B322837E6F00C5D56F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A35C0120A35BF12000000001 /* SampleCode.xcconfig */;
+			baseConfigurationReference = DBD17F70DBD3070000000001 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Conference-Mac-Diffable/Conference_Mac_Diffable.entitlements";
@@ -888,7 +888,7 @@
 		};
 		FDA8D15D225F8533000127E1 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A35C0120A35BF12000000001 /* SampleCode.xcconfig */;
+			baseConfigurationReference = DBD17F70DBD3070000000001 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -939,6 +939,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -950,7 +951,7 @@
 		};
 		FDA8D15E225F8533000127E1 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A35C0120A35BF12000000001 /* SampleCode.xcconfig */;
+			baseConfigurationReference = DBD17F70DBD3070000000001 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -995,6 +996,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1006,7 +1008,7 @@
 		};
 		FDA8D160225F8533000127E1 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A35C0120A35BF12000000001 /* SampleCode.xcconfig */;
+			baseConfigurationReference = DBD17F70DBD3070000000001 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1029,7 +1031,7 @@
 		};
 		FDA8D161225F8533000127E1 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A35C0120A35BF12000000001 /* SampleCode.xcconfig */;
+			baseConfigurationReference = DBD17F70DBD3070000000001 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
