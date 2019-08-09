@@ -160,7 +160,7 @@ extension OrthogonalScrollBehaviorViewController {
         }
 
         // initial data
-        let snapshot = NSDiffableDataSourceSnapshot<Int, Int>()
+        var snapshot = NSDiffableDataSourceSnapshot<Int, Int>()
         var identifierOffset = 0
         let itemsPerSection = 18
         SectionKind.allCases.forEach {

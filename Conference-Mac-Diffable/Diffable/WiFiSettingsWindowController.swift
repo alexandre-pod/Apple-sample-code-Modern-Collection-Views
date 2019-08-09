@@ -81,8 +81,8 @@ class WiFiSettingsWindowController: NSWindowController {
     }
 
     @IBOutlet weak var collectionView: NSCollectionView! = nil
-    private var dataSource: NSCollectionViewDiffableDataSourceReference<Section, Item>! = nil
-    private var currentSnapshot: NSDiffableDataSourceSnapshotReference<Section, Item>! = nil
+    private var dataSource: NSCollectionViewDiffableDataSourceReference! = nil
+    private var currentSnapshot: NSDiffableDataSourceSnapshotReference! = nil
     private var wifiController: WIFIController! = nil
     private lazy var configurationItems: [Item] = {
         return [Item(title: "Wi-Fi", type: .wifiEnabled),
@@ -114,12 +114,13 @@ extension WiFiSettingsWindowController {
             self.updateUI()
         }
 
-        dataSource = NSCollectionViewDiffableDataSourceReference<Section, Item>(collectionView: collectionView,
+        dataSource = NSCollectionViewDiffableDataSourceReference(collectionView: collectionView,
                                                                                 itemProvider: {
-            (collectionView: NSCollectionView, indexPath: IndexPath, item: Item) -> NSCollectionViewItem? in
+            (collectionView: NSCollectionView, indexPath: IndexPath, identifier: Any) -> NSCollectionViewItem? in
             guard let collectionViewItem = collectionView.makeItem(
                 withIdentifier: WiFiNetworkItem.reuseIdentifier,
-                for: indexPath) as? WiFiNetworkItem else { fatalError() }
+                for: indexPath) as? WiFiNetworkItem,
+                let item = identifier as? Item else { fatalError() }
 
             collectionViewItem.textField?.stringValue = item.title
 
@@ -157,7 +158,7 @@ extension WiFiSettingsWindowController {
         let sortedNetworks = controller.availableNetworks.sorted { $0.name < $1.name }
         let networkItems = sortedNetworks.map { Item(network: $0) }
 
-        currentSnapshot = NSDiffableDataSourceSnapshotReference<Section, Item>()
+        currentSnapshot = NSDiffableDataSourceSnapshotReference()
 
         let configSection = Section(.config)
         currentSnapshot.appendSections(withIdentifiers: [configSection])

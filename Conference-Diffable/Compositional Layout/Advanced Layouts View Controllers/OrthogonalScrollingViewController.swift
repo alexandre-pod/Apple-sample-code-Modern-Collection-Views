@@ -106,7 +106,7 @@ extension OrthogonalScrollingViewController {
         }
 
         // initial data
-        let snapshot = NSDiffableDataSourceSnapshot<Int, Int>()
+        var snapshot = NSDiffableDataSourceSnapshot<Int, Int>()
         var identifierOffset = 0
         let itemsPerSection = 30
         for section in 0..<5 {

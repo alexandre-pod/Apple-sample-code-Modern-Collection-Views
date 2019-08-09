@@ -11,7 +11,7 @@ class GridWindowController: NSWindowController {
 
     private let mainSection = NSString(string: "main")
 
-    private var dataSource: NSCollectionViewDiffableDataSourceReference<NSString, NSNumber>! = nil
+    private var dataSource: NSCollectionViewDiffableDataSourceReference! = nil
     @IBOutlet weak var gridCollectionView: NSCollectionView!
 
     override func windowDidLoad() {
@@ -45,18 +45,17 @@ extension GridWindowController {
         gridCollectionView.collectionViewLayout = createLayout()
     }
     private func configureDataSource() {
-        dataSource = NSCollectionViewDiffableDataSourceReference
-            <NSString, NSNumber>(collectionView: gridCollectionView, itemProvider: {
+        dataSource = NSCollectionViewDiffableDataSourceReference(collectionView: gridCollectionView, itemProvider: {
                 (collectionView: NSCollectionView,
                 indexPath: IndexPath,
-                identifier: NSNumber) -> NSCollectionViewItem? in
+                identifier: Any) -> NSCollectionViewItem? in
             let item = collectionView.makeItem(withIdentifier: TextItem.reuseIdentifier, for: indexPath)
             item.textField?.stringValue = "\(identifier)"
             return item
         })
 
         // initial data
-        let snapshot = NSDiffableDataSourceSnapshotReference<NSString, NSNumber>()
+        let snapshot = NSDiffableDataSourceSnapshotReference()
         snapshot.appendSections(withIdentifiers: [mainSection])
         snapshot.appendItems(withIdentifiers: Array(0..<94).map { NSNumber(value: $0) })
         dataSource.applySnapshot(snapshot, animatingDifferences: false)

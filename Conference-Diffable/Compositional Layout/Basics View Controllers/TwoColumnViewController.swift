@@ -75,7 +75,7 @@ extension TwoColumnViewController {
         }
 
         // initial data
-        let snapshot = NSDiffableDataSourceSnapshot<Section, Int>()
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Int>()
         snapshot.appendSections([.main])
         snapshot.appendItems(Array(0..<94))
         dataSource.apply(snapshot, animatingDifferences: false)

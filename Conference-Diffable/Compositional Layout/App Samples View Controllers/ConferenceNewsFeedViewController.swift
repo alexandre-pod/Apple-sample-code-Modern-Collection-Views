@@ -65,7 +65,7 @@ extension ConferenceNewsFeedViewController {
 
         // load our data
         let newsItems = newsController.items
-        let snapshot = NSDiffableDataSourceSnapshot<Section, ConferenceNewsController.NewsFeedItem>()
+        var snapshot = NSDiffableDataSourceSnapshot<Section, ConferenceNewsController.NewsFeedItem>()
         snapshot.appendSections([.main])
         snapshot.appendItems(newsItems)
         dataSource.apply(snapshot, animatingDifferences: false)

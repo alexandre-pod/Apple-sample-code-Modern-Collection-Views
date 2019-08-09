@@ -109,7 +109,7 @@ extension SectionHeadersFootersViewController {
         // initial data
         let itemsPerSection = 5
         let sections = Array(0..<5)
-        let snapshot = NSDiffableDataSourceSnapshot<Int, Int>()
+        var snapshot = NSDiffableDataSourceSnapshot<Int, Int>()
         var itemOffset = 0
         sections.forEach {
             snapshot.appendSections([$0])

@@ -43,7 +43,7 @@ extension MountainsViewController {
     func performQuery(with filter: String?) {
         let mountains = mountainsController.filteredMountains(with: filter).sorted { $0.name < $1.name }
 
-        let snapshot = NSDiffableDataSourceSnapshot<Section, MountainsController.Mountain>()
+        var snapshot = NSDiffableDataSourceSnapshot<Section, MountainsController.Mountain>()
         snapshot.appendSections([.main])
         snapshot.appendItems(mountains)
         dataSource.apply(snapshot, animatingDifferences: true)

@@ -57,7 +57,7 @@ extension InsertionSortViewController {
         var sectionCountNeedingSort = 0
 
         // grab the current state of the UI from the data source
-        let updatedSnapshot = dataSource.snapshot()
+        var updatedSnapshot = dataSource.snapshot()
 
         // for each section, if needed, step through and perform the next sorting step
         updatedSnapshot.sectionIdentifiers.forEach {
@@ -137,7 +137,7 @@ extension InsertionSortViewController {
     }
     func randomizedSnapshot(for bounds: CGRect) -> NSDiffableDataSourceSnapshot
         <InsertionSortArray, InsertionSortArray.SortNode> {
-        let snapshot = NSDiffableDataSourceSnapshot<InsertionSortArray, InsertionSortArray.SortNode>()
+        var snapshot = NSDiffableDataSourceSnapshot<InsertionSortArray, InsertionSortArray.SortNode>()
         let rowCount = rows(for: bounds)
         let columnCount = columns(for: bounds)
         for _ in 0..<rowCount {

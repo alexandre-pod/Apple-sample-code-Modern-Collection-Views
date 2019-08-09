@@ -11,7 +11,7 @@ class NestedGroupsWindowController: NSWindowController {
 
     private let mainSection = NSString(string: "main")
 
-    private var dataSource: NSCollectionViewDiffableDataSourceReference<NSString, NSNumber>! = nil
+    private var dataSource: NSCollectionViewDiffableDataSourceReference! = nil
     @IBOutlet weak var groupsCollectionView: NSCollectionView!
 
     override func windowDidLoad() {
@@ -82,9 +82,8 @@ extension NestedGroupsWindowController {
         groupsCollectionView.collectionViewLayout = createLayout()
     }
     private func configureDataSource() {
-        dataSource = NSCollectionViewDiffableDataSourceReference
-            <NSString, NSNumber>(collectionView: groupsCollectionView, itemProvider: {
-            (collectionView: NSCollectionView, indexPath: IndexPath, identifier: NSNumber) -> NSCollectionViewItem? in
+        dataSource = NSCollectionViewDiffableDataSourceReference(collectionView: groupsCollectionView, itemProvider: {
+            (collectionView: NSCollectionView, indexPath: IndexPath, identifier: Any) -> NSCollectionViewItem? in
             if let item = collectionView.makeItem(
                 withIdentifier: TextItem.reuseIdentifier, for: indexPath) as? TextItem {
                 item.textField?.stringValue = "\(indexPath.section), \(indexPath.item)"
@@ -98,7 +97,7 @@ extension NestedGroupsWindowController {
         })
 
         // initial data
-        let snapshot = NSDiffableDataSourceSnapshotReference<NSString, NSNumber>()
+        let snapshot = NSDiffableDataSourceSnapshotReference()
         snapshot.appendSections(withIdentifiers: [mainSection])
         snapshot.appendItems(withIdentifiers: Array(0..<100).map { NSNumber(value: $0) })
         dataSource.applySnapshot(snapshot, animatingDifferences: false)

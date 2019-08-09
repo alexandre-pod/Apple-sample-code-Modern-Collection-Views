@@ -12,7 +12,7 @@ class SectionHeadersFootersWindowController: NSWindowController {
     static let sectionHeaderElementKind = "section-header-element-kind"
     static let sectionFooterElementKind = "section-footer-element-kind"
 
-    private var dataSource: NSCollectionViewDiffableDataSourceReference<NSNumber, NSNumber>! = nil
+    private var dataSource: NSCollectionViewDiffableDataSourceReference! = nil
     @IBOutlet weak var sectionCollectionView: NSCollectionView!
 
     override func windowDidLoad() {
@@ -68,11 +68,10 @@ extension SectionHeadersFootersWindowController {
         sectionCollectionView.collectionViewLayout = createLayout()
     }
     private func configureDataSource() {
-        dataSource = NSCollectionViewDiffableDataSourceReference
-            <NSNumber, NSNumber>(collectionView: sectionCollectionView) {
+        dataSource = NSCollectionViewDiffableDataSourceReference(collectionView: sectionCollectionView) {
                 (collectionView: NSCollectionView,
                 indexPath: IndexPath,
-                identifier: NSNumber) -> NSCollectionViewItem? in
+                identifier: Any) -> NSCollectionViewItem? in
                 let item = self.sectionCollectionView.makeItem(withIdentifier: TextItem.reuseIdentifier, for: indexPath)
             item.textField?.stringValue = "\(indexPath.section),\(indexPath.item)"
             return item
@@ -95,7 +94,7 @@ extension SectionHeadersFootersWindowController {
         // initial data
         let itemsPerSection = 5
         let sections = Array(0..<5)
-        let snapshot = NSDiffableDataSourceSnapshotReference<NSNumber, NSNumber>()
+        let snapshot = NSDiffableDataSourceSnapshotReference()
         var itemOffset = 0
         sections.forEach {
             snapshot.appendSections(withIdentifiers: [NSNumber(value: $0)])

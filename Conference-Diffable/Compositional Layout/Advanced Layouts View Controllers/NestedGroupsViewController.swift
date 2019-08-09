@@ -108,7 +108,7 @@ extension NestedGroupsViewController {
         }
 
         // initial data
-        let snapshot = NSDiffableDataSourceSnapshot<Section, Int>()
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Int>()
         snapshot.appendSections([Section.main])
         snapshot.appendItems(Array(0..<100))
         dataSource.apply(snapshot, animatingDifferences: false)

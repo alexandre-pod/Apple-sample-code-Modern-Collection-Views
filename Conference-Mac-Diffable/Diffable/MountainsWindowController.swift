@@ -14,7 +14,7 @@ class MountainsWindowController: NSWindowController {
     private let mountainsController = MountainsController()
     @IBOutlet weak var searchField: NSSearchField!
     @IBOutlet weak var collectionView: NSCollectionView!
-    private var dataSource: NSCollectionViewDiffableDataSourceReference<NSString, MountainsController.Mountain>!
+    private var dataSource: NSCollectionViewDiffableDataSourceReference!
     private var nameFilter: String?
 
     override func windowDidLoad() {
@@ -27,20 +27,21 @@ class MountainsWindowController: NSWindowController {
 
 extension MountainsWindowController {
     private func configureDataSource() {
-        dataSource = NSCollectionViewDiffableDataSourceReference<NSString, MountainsController.Mountain>(
-        collectionView: collectionView) {
+        dataSource = NSCollectionViewDiffableDataSourceReference(collectionView: collectionView) {
             (collectionView: NSCollectionView,
             indexPath: IndexPath,
-            mountain: MountainsController.Mountain) -> NSCollectionViewItem? in
+            identifier: Any) -> NSCollectionViewItem? in
             let mountainItem = collectionView.makeItem(withIdentifier: TextItem.reuseIdentifier, for: indexPath)
-            mountainItem.textField?.stringValue = mountain.name
+            if let mountain = identifier as? MountainsController.Mountain {
+                mountainItem.textField?.stringValue = mountain.name
+            }
             return mountainItem
         }
     }
     private func performQuery(with filter: String?) {
         let mountains = self.mountainsController.filteredMountains(with: filter).sorted { $0.name < $1.name }
 
-        let snapshot = NSDiffableDataSourceSnapshotReference<NSString, MountainsController.Mountain>()
+        let snapshot = NSDiffableDataSourceSnapshotReference()
         snapshot.appendSections(withIdentifiers: [mainSection])
         snapshot.appendItems(withIdentifiers: mountains)
         dataSource.applySnapshot(snapshot, animatingDifferences: true)

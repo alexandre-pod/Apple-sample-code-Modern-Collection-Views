@@ -9,7 +9,7 @@ import Cocoa
 
 class OrthogonalScrollingWindowController: NSWindowController {
 
-    private var dataSource: NSCollectionViewDiffableDataSourceReference<NSNumber, NSNumber>! = nil
+    private var dataSource: NSCollectionViewDiffableDataSourceReference! = nil
     @IBOutlet weak var orthCollectionView: NSCollectionView!
 
     override func windowDidLoad() {
@@ -79,9 +79,8 @@ extension OrthogonalScrollingWindowController {
         orthCollectionView.collectionViewLayout = createLayout()
     }
     private func configureDataSource() {
-        dataSource = NSCollectionViewDiffableDataSourceReference
-            <NSNumber, NSNumber>(collectionView: orthCollectionView, itemProvider: {
-            (collectionView: NSCollectionView, indexPath: IndexPath, identifier: NSNumber) -> NSCollectionViewItem? in
+        dataSource = NSCollectionViewDiffableDataSourceReference(collectionView: orthCollectionView, itemProvider: {
+            (collectionView: NSCollectionView, indexPath: IndexPath, identifier: Any) -> NSCollectionViewItem? in
             if let item = collectionView.makeItem(
                 withIdentifier: TextItem.reuseIdentifier, for: indexPath) as? TextItem {
                 item.textField?.stringValue = "\(indexPath.section), \(indexPath.item)"
@@ -95,7 +94,7 @@ extension OrthogonalScrollingWindowController {
         })
 
         // initial data
-        let snapshot = NSDiffableDataSourceSnapshotReference<NSNumber, NSNumber>()
+        let snapshot = NSDiffableDataSourceSnapshotReference()
         snapshot.appendSections(withIdentifiers: [NSNumber(value: 0)])
         snapshot.appendItems(withIdentifiers: Array(0..<30).map { NSNumber(value: $0) })
         dataSource.applySnapshot(snapshot, animatingDifferences: false)

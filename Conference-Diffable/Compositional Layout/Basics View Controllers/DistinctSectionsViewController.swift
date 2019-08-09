@@ -118,7 +118,7 @@ extension DistinctSectionsViewController {
 
         // initial data
         let itemsPerSection = 10
-        let snapshot = NSDiffableDataSourceSnapshot<SectionLayoutKind, Int>()
+        var snapshot = NSDiffableDataSourceSnapshot<SectionLayoutKind, Int>()
         SectionLayoutKind.allCases.forEach {
             snapshot.appendSections([$0])
             let itemOffset = $0.rawValue * itemsPerSection

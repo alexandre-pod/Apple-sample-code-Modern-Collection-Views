@@ -24,7 +24,7 @@ class AdaptiveSectionsWindowController: NSWindowController {
         }
     }
 
-    private var dataSource: NSCollectionViewDiffableDataSourceReference<NSNumber, NSNumber>! = nil
+    private var dataSource: NSCollectionViewDiffableDataSourceReference! = nil
     @IBOutlet weak var aCollectionView: NSCollectionView!
 
     override func windowDidLoad() {
@@ -72,11 +72,10 @@ extension AdaptiveSectionsWindowController {
         aCollectionView.collectionViewLayout = createLayout()
     }
     private func configureDataSource() {
-        dataSource = NSCollectionViewDiffableDataSourceReference
-            <NSNumber, NSNumber>(collectionView: aCollectionView) {
+        dataSource = NSCollectionViewDiffableDataSourceReference(collectionView: aCollectionView) {
                 (collectionView: NSCollectionView,
                 indexPath: IndexPath,
-                identifier: NSNumber) -> NSCollectionViewItem? in
+                identifier: Any) -> NSCollectionViewItem? in
             let section = SectionLayoutKind(rawValue: indexPath.section)!
             if section == .list {
                 if let item = collectionView.makeItem(
@@ -102,7 +101,7 @@ extension AdaptiveSectionsWindowController {
 
         // initial data
         let itemsPerSection = 10
-        let snapshot = NSDiffableDataSourceSnapshotReference<NSNumber, NSNumber>()
+        let snapshot = NSDiffableDataSourceSnapshotReference()
         SectionLayoutKind.allCases.forEach {
             snapshot.appendSections(withIdentifiers: [NSNumber(value: $0.rawValue)])
             let itemOffset = $0.rawValue * itemsPerSection

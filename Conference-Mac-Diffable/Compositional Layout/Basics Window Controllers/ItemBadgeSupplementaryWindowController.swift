@@ -28,7 +28,7 @@ class ItemBadgeSupplementaryWindowController: NSWindowController {
         }
     }
 
-    private var dataSource: NSCollectionViewDiffableDataSourceReference<NSString, Model>! = nil
+    private var dataSource: NSCollectionViewDiffableDataSourceReference! = nil
     @IBOutlet weak var itemCollectionView: NSCollectionView!
 
     override func windowDidLoad() {
@@ -76,11 +76,12 @@ extension ItemBadgeSupplementaryWindowController {
         itemCollectionView.collectionViewLayout = createLayout()
     }
     private func configureDataSource() {
-        dataSource = NSCollectionViewDiffableDataSourceReference
-            <NSString, Model>(collectionView: itemCollectionView, itemProvider: {
-            (collectionView: NSCollectionView, indexPath: IndexPath, model: Model) -> NSCollectionViewItem? in
+        dataSource = NSCollectionViewDiffableDataSourceReference(collectionView: itemCollectionView, itemProvider: {
+            (collectionView: NSCollectionView, indexPath: IndexPath, identifier: Any) -> NSCollectionViewItem? in
             let item = collectionView.makeItem(withIdentifier: TextItem.reuseIdentifier, for: indexPath)
-            item.textField?.stringValue = model.title
+            if let model = identifier as? Model {
+                item.textField?.stringValue = model.title
+            }
             if let box = item.view as? NSBox {
                 box.cornerRadius = 8
             }
@@ -92,7 +93,7 @@ extension ItemBadgeSupplementaryWindowController {
         })
         dataSource.supplementaryViewProvider = {
             [weak self] (collectionView: NSCollectionView, kind: String, indexPath: IndexPath) -> NSView? in
-            guard let self = self, let model = self.dataSource.itemIdentifier(for: indexPath) else { return nil }
+            guard let self = self, let model = self.dataSource.itemIdentifier(for: indexPath) as? Model else { return nil }
             let hasBadgeCount = model.badgeCount > 0
             let badgeView = collectionView.makeSupplementaryView(
                 ofKind: kind,
@@ -108,7 +109,7 @@ extension ItemBadgeSupplementaryWindowController {
         }
 
         // initial data
-        let snapshot = NSDiffableDataSourceSnapshotReference<NSString, Model>()
+        let snapshot = NSDiffableDataSourceSnapshotReference()
         snapshot.appendSections(withIdentifiers: [mainSection])
         let models = (0..<100).map { Model(title: "\($0)", badgeCount: Int.random(in: 0..<3)) }
         snapshot.appendItems(withIdentifiers: models)
