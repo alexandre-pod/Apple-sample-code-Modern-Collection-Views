@@ -26,8 +26,13 @@ class MountainsController {
             return name.lowercased().contains(lowercasedFilter)
         }
     }
-    func filteredMountains(with filter: String?) -> [Mountain] {
-        return mountains.filter { $0.contains(filter) }
+    func filteredMountains(with filter: String?=nil, limit: Int?=nil) -> [Mountain] {
+        let filtered = mountains.filter { $0.contains(filter) }
+        if let limit = limit {
+            return Array(filtered.prefix(through: limit))
+        } else {
+            return filtered
+        }
     }
     private lazy var mountains: [Mountain] = {
         return generateMountains()

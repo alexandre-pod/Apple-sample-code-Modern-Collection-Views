@@ -98,7 +98,9 @@ class OutlineViewController: UIViewController {
                 OutlineItem(title: "Mountains Search", indentLevel: 1, viewController: MountainsViewController.self),
                 OutlineItem(title: "Settings: Wi-Fi", indentLevel: 1, viewController: WiFiSettingsViewController.self),
                 OutlineItem(title: "Insertion Sort Visualization", indentLevel: 1,
-                            viewController: InsertionSortViewController.self)
+                            viewController: InsertionSortViewController.self),
+                OutlineItem(title: "UITableView: Editing", indentLevel: 1,
+                            viewController: TableViewEditingViewController.self)
                 ])
         ]
     }()

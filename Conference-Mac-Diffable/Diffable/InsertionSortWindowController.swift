@@ -112,8 +112,8 @@ extension InsertionSortWindowController {
                 (collectionView: NSCollectionView,
                 indexPath: IndexPath,
                 identifier: Any) in
-            let item = collectionView.makeItem(withIdentifier: InsertionSortItem.reuseIdentifier, for: indexPath)
-            if let box = item.view as? NSBox, let sortNode = identifier as? InsertionSortArray.SortNode {
+                let item = collectionView.makeItem(withIdentifier: InsertionSortItem.reuseIdentifier, for: indexPath)
+            if let sortNode = identifier as? InsertionSortArray.SortNode, let box = item.view as? NSBox {
                 box.fillColor = sortNode.color
             }
             return item
