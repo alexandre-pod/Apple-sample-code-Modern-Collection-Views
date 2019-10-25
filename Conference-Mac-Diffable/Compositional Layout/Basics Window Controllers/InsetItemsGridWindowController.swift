@@ -9,9 +9,11 @@ import Cocoa
 
 class InsetItemsGridWindowController: NSWindowController {
 
-    private let mainSection = NSString(string: "main")
+    enum Section {
+        case main
+    }
 
-    private var dataSource: NSCollectionViewDiffableDataSourceReference! = nil
+    private var dataSource: NSCollectionViewDiffableDataSource<Section, Int>! = nil
     @IBOutlet weak var collectionView: NSCollectionView!
 
     override func windowDidLoad() {
@@ -46,19 +48,18 @@ extension InsetItemsGridWindowController {
         collectionView.collectionViewLayout = createLayout()
     }
     private func configureDataSource() {
-        dataSource = NSCollectionViewDiffableDataSourceReference(collectionView: collectionView, itemProvider: {
-                (collectionView: NSCollectionView,
-                indexPath: IndexPath,
-                identifier: Any) -> NSCollectionViewItem? in
+        dataSource = NSCollectionViewDiffableDataSource
+            <Section, Int>(collectionView: collectionView, itemProvider: {
+                (collectionView: NSCollectionView, indexPath: IndexPath, identifier: Int) -> NSCollectionViewItem? in
             let item = collectionView.makeItem(withIdentifier: TextItem.reuseIdentifier, for: indexPath)
             item.textField?.stringValue = "\(identifier)"
             return item
         })
 
         // initial data
-        let snapshot = NSDiffableDataSourceSnapshotReference()
-        snapshot.appendSections(withIdentifiers: [mainSection])
-        snapshot.appendItems(withIdentifiers: Array(0..<94).map { NSNumber(value: $0) })
-        dataSource.applySnapshot(snapshot, animatingDifferences: false)
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Int>()
+        snapshot.appendSections([Section.main])
+        snapshot.appendItems(Array(0..<94))
+        dataSource.apply(snapshot, animatingDifferences: false)
     }
 }

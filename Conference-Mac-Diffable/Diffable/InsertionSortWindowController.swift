@@ -12,7 +12,8 @@ class InsertionSortWindowController: NSWindowController {
     @IBOutlet weak var sortButton: NSButton!
     static let nodeSize = CGSize(width: 16, height: 34)
     @IBOutlet weak var collectionView: NSCollectionView!
-    var dataSource: NSCollectionViewDiffableDataSourceReference!
+    var dataSource: NSCollectionViewDiffableDataSource
+        <InsertionSortArray, InsertionSortArray.SortNode>!
     var isSorting = false
     var isSorted = false
 
@@ -50,31 +51,29 @@ extension InsertionSortWindowController {
         var sectionCountNeedingSort = 0
 
         // grab the current state of the UI from the data source
-        let snapshot = dataSource.snapshot()
+        var updatedSnapshot = dataSource.snapshot()
 
         // for each section, if needed, step through and perform the next sorting step
-        if let sections = snapshot.sectionIdentifiers as? [InsertionSortArray] {
-            sections.forEach {
-                let section = $0
-                if !section.isSorted {
+        updatedSnapshot.sectionIdentifiers.forEach {
+            let section = $0
+            if !section.isSorted {
 
-                    // step the sort algorthim
-                    section.sortNext()
-                    let items = section.values
+                // step the sort algorthim
+                section.sortNext()
+                let items = section.values
 
-                    // replace our items for this section with the newly sorted items
-                    snapshot.deleteItems(withIdentifiers: items)
-                    snapshot.appendItems(withIdentifiers: items, intoSectionWithIdentifier: section)
+                // replace our items for this section with the newly sorted items
+                updatedSnapshot.deleteItems(items)
+                updatedSnapshot.appendItems(items, toSection: section)
 
-                    sectionCountNeedingSort += 1
-                }
+                sectionCountNeedingSort += 1
             }
         }
 
         var shouldReset = false
         var delay = 125
         if sectionCountNeedingSort > 0 {
-            self.dataSource.applySnapshot(snapshot, animatingDifferences: true)
+            dataSource.apply(updatedSnapshot)
         } else {
             delay = 1000
             shouldReset = true
@@ -82,13 +81,13 @@ extension InsertionSortWindowController {
         let bounds = collectionView.bounds
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(delay)) {
             if shouldReset {
-                let snapshot = self.snapshot(for: bounds)
-                self.dataSource.applySnapshot(snapshot, animatingDifferences: false)
+                let randomizedSnapshot = self.snapshot(for: bounds)
+                self.dataSource.apply(randomizedSnapshot, animatingDifferences: false)
             }
             self.performSortStep()
         }
     }
-    
+
     func layout() -> NSCollectionViewLayout {
         let layout = NSCollectionViewCompositionalLayout {
             (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
@@ -106,40 +105,43 @@ extension InsertionSortWindowController {
         }
         return layout
     }
-    
+
     func configureDataSource() {
-        dataSource = NSCollectionViewDiffableDataSourceReference(collectionView: collectionView) {
+        dataSource = NSCollectionViewDiffableDataSource
+            <InsertionSortArray, InsertionSortArray.SortNode>(collectionView: collectionView) {
                 (collectionView: NSCollectionView,
                 indexPath: IndexPath,
                 identifier: Any) in
-                let item = collectionView.makeItem(withIdentifier: InsertionSortItem.reuseIdentifier, for: indexPath)
+                let item = self.collectionView.makeItem(withIdentifier: InsertionSortItem.reuseIdentifier, for: indexPath)
             if let sortNode = identifier as? InsertionSortArray.SortNode, let box = item.view as? NSBox {
                 box.fillColor = sortNode.color
             }
             return item
         }
+        let backgroundQueue = DispatchQueue(label: "com.example.apple-samplecode.insertion-sort.update")
         if let bounds = collectionView.enclosingScrollView?.contentView.bounds {
-            let snapshot = self.snapshot(for: bounds)
-            self.dataSource.applySnapshot(snapshot, animatingDifferences: false)
+            backgroundQueue.async {
+                let snapshot = self.snapshot(for: bounds)
+                self.dataSource.apply(snapshot, animatingDifferences: false)
+            }
         }
     }
-    
-    func snapshot(for bounds: CGRect) -> NSDiffableDataSourceSnapshotReference {
-        let snapshot = NSDiffableDataSourceSnapshotReference()
+    func snapshot(for bounds: CGRect) -> NSDiffableDataSourceSnapshot<InsertionSortArray, InsertionSortArray.SortNode> {
+        var snapshot = NSDiffableDataSourceSnapshot<InsertionSortArray, InsertionSortArray.SortNode>()
         let rowCount = rows(for: bounds)
         let columnCount = columns(for: bounds)
         for _ in 0..<rowCount {
             let section = InsertionSortArray(count: columnCount)
-            snapshot.appendSections(withIdentifiers: [section])
-            snapshot.appendItems(withIdentifiers: section.values)
+            snapshot.appendSections([section])
+            snapshot.appendItems(section.values)
         }
         return snapshot
     }
-    
+
     func rows(for bounds: CGRect) -> Int {
         return Int(bounds.height / InsertionSortWindowController.nodeSize.height)
     }
-    
+
     func columns(for bounds: CGRect) -> Int {
         return Int(bounds.width / InsertionSortWindowController.nodeSize.width)
     }

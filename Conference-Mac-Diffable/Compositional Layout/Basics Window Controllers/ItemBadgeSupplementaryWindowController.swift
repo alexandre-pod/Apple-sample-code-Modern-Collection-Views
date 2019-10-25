@@ -10,17 +10,15 @@ import Cocoa
 class ItemBadgeSupplementaryWindowController: NSWindowController {
 
     static let badgeElementKind = "badge-element-kind"
-    static let badgeSupplementaryViewReuseIdentifier = NSUserInterfaceItemIdentifier("badge-reuse-identifier")
-    private let mainSection = NSString(string: "main")
+    static let badgeSupplementaryViewReuseIdentifier = NSUserInterfaceItemIdentifier("contact-badge-reuse-identifier")
 
-    class Model {
+    enum Section {
+        case main
+    }
+
+    struct Model: Hashable {
         let title: String
         let badgeCount: Int
-
-        init(title: String, badgeCount: Int) {
-            self.title = title
-            self.badgeCount = badgeCount
-        }
 
         let identifier = UUID()
         func hash(into hasher: inout Hasher) {
@@ -28,8 +26,8 @@ class ItemBadgeSupplementaryWindowController: NSWindowController {
         }
     }
 
-    private var dataSource: NSCollectionViewDiffableDataSourceReference! = nil
-    @IBOutlet weak var itemCollectionView: NSCollectionView!
+    private var dataSource: NSCollectionViewDiffableDataSource<Section, Model>! = nil
+    @IBOutlet weak var collectionView: NSCollectionView!
 
     override func windowDidLoad() {
         super.windowDidLoad()
@@ -66,22 +64,21 @@ extension ItemBadgeSupplementaryWindowController {
 extension ItemBadgeSupplementaryWindowController {
     private func configureHierarchy() {
         let itemNib = NSNib(nibNamed: "TextItem", bundle: nil)
-        itemCollectionView.register(itemNib, forItemWithIdentifier: TextItem.reuseIdentifier)
+        collectionView.register(itemNib, forItemWithIdentifier: TextItem.reuseIdentifier)
 
         let badgeSupplementaryNib = NSNib(nibNamed: "BadgeSupplementaryView", bundle: nil)
-        itemCollectionView.register(badgeSupplementaryNib,
+        collectionView.register(badgeSupplementaryNib,
                     forSupplementaryViewOfKind: ItemBadgeSupplementaryWindowController.badgeElementKind,
                     withIdentifier: ItemBadgeSupplementaryWindowController.badgeSupplementaryViewReuseIdentifier)
 
-        itemCollectionView.collectionViewLayout = createLayout()
+        collectionView.collectionViewLayout = createLayout()
     }
-    private func configureDataSource() {
-        dataSource = NSCollectionViewDiffableDataSourceReference(collectionView: itemCollectionView, itemProvider: {
-            (collectionView: NSCollectionView, indexPath: IndexPath, identifier: Any) -> NSCollectionViewItem? in
+    func configureDataSource() {
+
+        dataSource = NSCollectionViewDiffableDataSource<Section, Model>(collectionView: collectionView, itemProvider: {
+            (collectionView: NSCollectionView, indexPath: IndexPath, model: Model) -> NSCollectionViewItem? in
             let item = collectionView.makeItem(withIdentifier: TextItem.reuseIdentifier, for: indexPath)
-            if let model = identifier as? Model {
-                item.textField?.stringValue = model.title
-            }
+            item.textField?.stringValue = model.title
             if let box = item.view as? NSBox {
                 box.cornerRadius = 8
             }
@@ -92,29 +89,33 @@ extension ItemBadgeSupplementaryWindowController {
             return item
         })
         dataSource.supplementaryViewProvider = {
-            [weak self] (collectionView: NSCollectionView, kind: String, indexPath: IndexPath) -> NSView? in
-            guard let self = self, let model = self.dataSource.itemIdentifier(for: indexPath) as? Model else { return nil }
+            (collectionView: NSCollectionView, kind: String, indexPath: IndexPath) -> (NSView & NSCollectionViewElement)? in
+            guard let model = self.dataSource.itemIdentifier(for: indexPath) else { return nil }
             let hasBadgeCount = model.badgeCount > 0
-            let badgeView = collectionView.makeSupplementaryView(
+            if let badgeView = collectionView.makeSupplementaryView(
                 ofKind: kind,
                 withIdentifier: ItemBadgeSupplementaryWindowController.badgeSupplementaryViewReuseIdentifier,
-                for: indexPath)
-            if let box = badgeView as? NSBox {
-                if let label = box.contentView?.subviews.first as? NSTextField {
+                for: indexPath) as? BadgeView {
+                if let label = badgeView.contentView?.subviews.first as? NSTextField {
                     label.stringValue = "\(model.badgeCount)"
                 }
+                badgeView.isHidden = !hasBadgeCount
+                return badgeView
+            } else {
+                fatalError("Cannot create new supplementary")
             }
-            badgeView.isHidden = !hasBadgeCount
-            return badgeView
         }
 
         // initial data
-        let snapshot = NSDiffableDataSourceSnapshotReference()
-        snapshot.appendSections(withIdentifiers: [mainSection])
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Model>()
+        snapshot.appendSections([.main])
         let models = (0..<100).map { Model(title: "\($0)", badgeCount: Int.random(in: 0..<3)) }
-        snapshot.appendItems(withIdentifiers: models)
-        dataSource.applySnapshot(snapshot, animatingDifferences: false)
+        snapshot.appendItems(models)
+        dataSource.apply(snapshot, animatingDifferences: false)
     }
+}
+
+class BadgeView: NSBox, NSCollectionViewElement {
 }
 
 extension NSColor {

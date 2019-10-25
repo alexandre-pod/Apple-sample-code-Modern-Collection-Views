@@ -11,21 +11,23 @@ class AdaptiveSectionsWindowController: NSWindowController {
 
     enum SectionLayoutKind: Int, CaseIterable {
         case list, grid5, grid3
-        func columnCountFor(_ width: CGFloat) -> Int {
-            let wideMode = width > 500
+        func columnCount(for width: CGFloat) -> Int {
+            let wideMode = width > 800
             switch self {
             case .grid3:
                 return wideMode ? 6 : 3
+
             case .grid5:
                 return wideMode ? 10 : 5
+
             case .list:
                 return wideMode ? 2 : 1
             }
         }
     }
 
-    private var dataSource: NSCollectionViewDiffableDataSourceReference! = nil
-    @IBOutlet weak var aCollectionView: NSCollectionView!
+    private var dataSource: NSCollectionViewDiffableDataSource<SectionLayoutKind, Int>! = nil
+    @IBOutlet weak var collectionView: NSCollectionView!
 
     override func windowDidLoad() {
         super.windowDidLoad()
@@ -40,7 +42,7 @@ extension AdaptiveSectionsWindowController {
             (sectionIndex: Int,
             layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection in
             let layoutKind = SectionLayoutKind(rawValue: sectionIndex)!
-            let columns = layoutKind.columnCountFor(layoutEnvironment.container.effectiveContentSize.width)
+            let columns = layoutKind.columnCount(for: layoutEnvironment.container.effectiveContentSize.width)
 
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.2),
                                                   heightDimension: .fractionalHeight(1.0))
@@ -64,18 +66,16 @@ extension AdaptiveSectionsWindowController {
     private func configureHierarchy() {
 
         let textItemNib = NSNib(nibNamed: "TextItem", bundle: nil)
-        aCollectionView.register(textItemNib, forItemWithIdentifier: TextItem.reuseIdentifier)
+        collectionView.register(textItemNib, forItemWithIdentifier: TextItem.reuseIdentifier)
 
         let listItemNib = NSNib(nibNamed: "ListItem", bundle: nil)
-        aCollectionView.register(listItemNib, forItemWithIdentifier: ListItem.reuseIdentifier)
+        collectionView.register(listItemNib, forItemWithIdentifier: ListItem.reuseIdentifier)
 
-        aCollectionView.collectionViewLayout = createLayout()
+        collectionView.collectionViewLayout = createLayout()
     }
     private func configureDataSource() {
-        dataSource = NSCollectionViewDiffableDataSourceReference(collectionView: aCollectionView) {
-                (collectionView: NSCollectionView,
-                indexPath: IndexPath,
-                identifier: Any) -> NSCollectionViewItem? in
+        dataSource = NSCollectionViewDiffableDataSource<SectionLayoutKind, Int>(collectionView: collectionView) {
+                (collectionView: NSCollectionView, indexPath: IndexPath, identifier: Int) -> NSCollectionViewItem? in
             let section = SectionLayoutKind(rawValue: indexPath.section)!
             if section == .list {
                 if let item = collectionView.makeItem(
@@ -101,15 +101,13 @@ extension AdaptiveSectionsWindowController {
 
         // initial data
         let itemsPerSection = 10
-        let snapshot = NSDiffableDataSourceSnapshotReference()
+        var snapshot = NSDiffableDataSourceSnapshot<SectionLayoutKind, Int>()
         SectionLayoutKind.allCases.forEach {
-            snapshot.appendSections(withIdentifiers: [NSNumber(value: $0.rawValue)])
+            snapshot.appendSections([$0])
             let itemOffset = $0.rawValue * itemsPerSection
             let itemUpperbound = itemOffset + itemsPerSection
-            snapshot.appendItems(withIdentifiers: Array(itemOffset..<itemUpperbound).map {
-                NSNumber(value: $0)
-            })
+            snapshot.appendItems(Array(itemOffset..<itemUpperbound))
         }
-        dataSource.applySnapshot(snapshot, animatingDifferences: false)
+        dataSource.apply(snapshot, animatingDifferences: false)
     }
 }

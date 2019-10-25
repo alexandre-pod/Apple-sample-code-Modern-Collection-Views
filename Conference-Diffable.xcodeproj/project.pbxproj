@@ -141,8 +141,8 @@
 		573612CB22A1CDA800671B03 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = "Conference-Mac-Diffable/Base.lproj/SectionHeadersFootersWindow.xib"; sourceTree = SOURCE_ROOT; };
 		573612CD22A1CDA900671B03 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = "Conference-Mac-Diffable/Base.lproj/TwoColumnWindow.xib"; sourceTree = SOURCE_ROOT; };
 		5777C884229910E100AEF7BB /* MountainsRawData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MountainsRawData.swift; sourceTree = "<group>"; };
-		707489B0707224F000000001 /* SampleCode.xcconfig */ = {isa = PBXFileReference; name = SampleCode.xcconfig; path = Configuration/SampleCode.xcconfig; sourceTree = "<group>"; };
-		707E84F0707E837000000001 /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE.txt; sourceTree = "<group>"; };
+		6A98C7F3ECCD0837A587C8A9 /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE.txt; sourceTree = "<group>"; };
+		E8E6ED6DC6EF1E1B8C6DCEEA /* SampleCode.xcconfig */ = {isa = PBXFileReference; name = SampleCode.xcconfig; path = Configuration/SampleCode.xcconfig; sourceTree = "<group>"; };
 		FD000CB922F0E68100AE3B95 /* TableViewEditingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewEditingViewController.swift; sourceTree = "<group>"; };
 		FD09E6D32276BC250009D23B /* SectionHeadersFootersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeadersFootersViewController.swift; sourceTree = "<group>"; };
 		FD09E6D52276BF030009D23B /* PinnedSectionHeaderFooterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinnedSectionHeaderFooterViewController.swift; sourceTree = "<group>"; };
@@ -307,21 +307,21 @@
 			path = "xib Files";
 			sourceTree = "<group>";
 		};
-		70748C7070748C3000000001 /* Configuration */ = {
+		A66BDDF27C93278D1A8E28FD /* LICENSE */ = {
 			isa = PBXGroup;
 			children = (
-				707489B0707224F000000001 /* SampleCode.xcconfig */,
-			);
-			name = Configuration;
-			sourceTree = "<group>";
-		};
-		707E78A0707E786000000001 /* LICENSE */ = {
-			isa = PBXGroup;
-			children = (
-				707E84F0707E837000000001 /* LICENSE.txt */,
+				6A98C7F3ECCD0837A587C8A9 /* LICENSE.txt */,
 			);
 			name = LICENSE;
 			path = LICENSE;
+			sourceTree = "<group>";
+		};
+		F2B96841076005355F12B286 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				E8E6ED6DC6EF1E1B8C6DCEEA /* SampleCode.xcconfig */,
+			);
+			name = Configuration;
 			sourceTree = "<group>";
 		};
 		FD20C3CE2268DA5200935CB2 /* Controllers */ = {
@@ -436,8 +436,8 @@
 				053A00A822837E6E00C5D56F /* Conference-Mac-Diffable */,
 				FDA8D138225F8531000127E1 /* Products */,
 				FD9671C52268F1FC00301EBB /* Frameworks */,
-				70748C7070748C3000000001 /* Configuration */,
-				707E78A0707E786000000001 /* LICENSE */,
+				F2B96841076005355F12B286 /* Configuration */,
+				A66BDDF27C93278D1A8E28FD /* LICENSE */,
 			);
 			sourceTree = "<group>";
 		};
@@ -477,7 +477,6 @@
 				053A00A322837E6E00C5D56F /* Sources */,
 				053A00A422837E6E00C5D56F /* Frameworks */,
 				053A00A522837E6E00C5D56F /* Resources */,
-				0E94A2D00E922F4000000001,
 			);
 			buildRules = (
 			);
@@ -495,7 +494,6 @@
 				FDA8D133225F8531000127E1 /* Sources */,
 				FDA8D134225F8531000127E1 /* Frameworks */,
 				FDA8D135225F8531000127E1 /* Resources */,
-				0E926A600E926A2000000001,
 			);
 			buildRules = (
 			);
@@ -514,7 +512,7 @@
 			attributes = {
 				DefaultBuildSystemTypeForWorkspace = Original;
 				LastSwiftUpdateCheck = 1100;
-				LastUpgradeCheck = 1100;
+				LastUpgradeCheck = 1120;
 				ORGANIZATIONNAME = Apple;
 				TargetAttributes = {
 					053A00A622837E6E00C5D56F = {
@@ -844,7 +842,7 @@
 /* Begin XCBuildConfiguration section */
 		053A00B222837E6F00C5D56F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 707489B0707224F000000001 /* SampleCode.xcconfig */;
+			baseConfigurationReference = E8E6ED6DC6EF1E1B8C6DCEEA /* SampleCode.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Conference-Mac-Diffable/Conference_Mac_Diffable.entitlements";
@@ -852,12 +850,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "Conference-Mac-Diffable/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 10.15.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.Conference-Mac-Diffable${SAMPLE_CODE_DISAMBIGUATOR}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -869,7 +868,7 @@
 		};
 		053A00B322837E6F00C5D56F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 707489B0707224F000000001 /* SampleCode.xcconfig */;
+			baseConfigurationReference = E8E6ED6DC6EF1E1B8C6DCEEA /* SampleCode.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Conference-Mac-Diffable/Conference_Mac_Diffable.entitlements";
@@ -877,12 +876,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "Conference-Mac-Diffable/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 10.15.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.Conference-Mac-Diffable${SAMPLE_CODE_DISAMBIGUATOR}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -894,7 +894,7 @@
 		};
 		FDA8D15D225F8533000127E1 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 707489B0707224F000000001 /* SampleCode.xcconfig */;
+			baseConfigurationReference = E8E6ED6DC6EF1E1B8C6DCEEA /* SampleCode.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -957,7 +957,7 @@
 		};
 		FDA8D15E225F8533000127E1 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 707489B0707224F000000001 /* SampleCode.xcconfig */;
+			baseConfigurationReference = E8E6ED6DC6EF1E1B8C6DCEEA /* SampleCode.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1014,7 +1014,7 @@
 		};
 		FDA8D160225F8533000127E1 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 707489B0707224F000000001 /* SampleCode.xcconfig */;
+			baseConfigurationReference = E8E6ED6DC6EF1E1B8C6DCEEA /* SampleCode.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1037,7 +1037,7 @@
 		};
 		FDA8D161225F8533000127E1 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 707489B0707224F000000001 /* SampleCode.xcconfig */;
+			baseConfigurationReference = E8E6ED6DC6EF1E1B8C6DCEEA /* SampleCode.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

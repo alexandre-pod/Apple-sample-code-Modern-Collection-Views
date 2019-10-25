@@ -9,41 +9,15 @@ import Cocoa
 
 class WiFiSettingsWindowController: NSWindowController {
 
-    // For now, section and item identifiers must be class types that hash
-    // and compare as Objective-C NSObjects on macOS, or else you must maintain
-    // pointer identity for each given section and item.  These section and
-    // item types are used with "Reference" variants of the DiffableDataSource API.
-    // Anticipated Swift overlay support will allow native Swift objects and value
-    // types to be used along with the regular DiffableDataSource classes instead.
-
-    enum Kind: Int {
-        case config
-        case networks
-    }
-
-    class Section: NSObject {
-
-        let kind: Kind
-
-        init(_ kind: Kind) {
-            self.kind = kind
-        }
-
-        override var hash: Int {
-            return kind.rawValue
-        }
-
-        override func isEqual(_ object: Any?) -> Bool {
-            guard let section = object as? Section else { return false }
-            return kind == section.kind
-        }
+    enum Section: CaseIterable {
+        case config, networks
     }
 
     enum ItemType {
         case wifiEnabled, currentNetwork, availableNetwork
     }
 
-    class Item: NSObject {
+    struct Item: Hashable {
         let title: String
         let type: ItemType
         let network: WIFIController.Network?
@@ -68,21 +42,15 @@ class WiFiSettingsWindowController: NSWindowController {
             return type == .availableNetwork
         }
 
-        let identifier: UUID
-
-        override var hash: Int {
-            return identifier.hashValue
-        }
-
-        override func isEqual(_ object: Any?) -> Bool {
-            guard let item = object as? Item else { return false }
-            return identifier == item.identifier
+        private let identifier: UUID
+        func hash(into hasher: inout Hasher) {
+            hasher.combine(self.identifier)
         }
     }
 
     @IBOutlet weak var collectionView: NSCollectionView! = nil
-    private var dataSource: NSCollectionViewDiffableDataSourceReference! = nil
-    private var currentSnapshot: NSDiffableDataSourceSnapshotReference! = nil
+    private var dataSource: NSCollectionViewDiffableDataSource<Section, Item>! = nil
+    private var currentSnapshot: NSDiffableDataSourceSnapshot<Section, Item>! = nil
     private var wifiController: WIFIController! = nil
     private lazy var configurationItems: [Item] = {
         return [Item(title: "Wi-Fi", type: .wifiEnabled),
@@ -114,13 +82,11 @@ extension WiFiSettingsWindowController {
             self.updateUI()
         }
 
-        dataSource = NSCollectionViewDiffableDataSourceReference(collectionView: collectionView,
-                                                                                itemProvider: {
-            (collectionView: NSCollectionView, indexPath: IndexPath, identifier: Any) -> NSCollectionViewItem? in
+        dataSource = NSCollectionViewDiffableDataSource<Section, Item>(collectionView: collectionView, itemProvider: {
+            (collectionView: NSCollectionView, indexPath: IndexPath, item: Item) -> NSCollectionViewItem? in
             guard let collectionViewItem = collectionView.makeItem(
                 withIdentifier: WiFiNetworkItem.reuseIdentifier,
-                for: indexPath) as? WiFiNetworkItem,
-                let item = identifier as? Item else { fatalError() }
+                for: indexPath) as? WiFiNetworkItem else { fatalError() }
 
             collectionViewItem.textField?.stringValue = item.title
 
@@ -154,23 +120,22 @@ extension WiFiSettingsWindowController {
 
     private func updateUI(animated: Bool = true) {
         guard let controller = self.wifiController else { return }
+
         let configItems = configurationItems.filter { !($0.type == .currentNetwork && !controller.wifiEnabled) }
-        let sortedNetworks = controller.availableNetworks.sorted { $0.name < $1.name }
-        let networkItems = sortedNetworks.map { Item(network: $0) }
 
-        currentSnapshot = NSDiffableDataSourceSnapshotReference()
+        currentSnapshot = NSDiffableDataSourceSnapshot<Section, Item>()
 
-        let configSection = Section(.config)
-        currentSnapshot.appendSections(withIdentifiers: [configSection])
-        currentSnapshot.appendItems(withIdentifiers: configItems, intoSectionWithIdentifier: configSection)
+        currentSnapshot.appendSections([.config])
+        currentSnapshot.appendItems(configItems, toSection: .config)
 
         if controller.wifiEnabled {
-            let networkSection = Section(.networks)
-            currentSnapshot.appendSections(withIdentifiers: [networkSection])
-            currentSnapshot.appendItems(withIdentifiers: networkItems, intoSectionWithIdentifier: networkSection)
+            let sortedNetworks = controller.availableNetworks.sorted { $0.name < $1.name }
+            let networkItems = sortedNetworks.map { Item(network: $0) }
+            currentSnapshot.appendSections([.networks])
+            currentSnapshot.appendItems(networkItems, toSection: .networks)
         }
 
-        self.dataSource.applySnapshot(currentSnapshot, animatingDifferences: animated)
+        self.dataSource.apply(currentSnapshot, animatingDifferences: animated)
     }
 
     private func createLayout() -> NSCollectionViewLayout {

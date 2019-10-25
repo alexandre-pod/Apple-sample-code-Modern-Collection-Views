@@ -9,12 +9,14 @@ import Cocoa
 
 class MountainsWindowController: NSWindowController {
 
-    private let mainSection = NSString(string: "main")
+    enum Section: CaseIterable {
+        case main
+    }
 
     private let mountainsController = MountainsController()
     @IBOutlet weak var searchField: NSSearchField!
     @IBOutlet weak var collectionView: NSCollectionView!
-    private var dataSource: NSCollectionViewDiffableDataSourceReference!
+    private var dataSource: NSCollectionViewDiffableDataSource<Section, MountainsController.Mountain>!
     private var nameFilter: String?
 
     override func windowDidLoad() {
@@ -27,7 +29,8 @@ class MountainsWindowController: NSWindowController {
 
 extension MountainsWindowController {
     private func configureDataSource() {
-        dataSource = NSCollectionViewDiffableDataSourceReference(collectionView: collectionView) {
+        dataSource = NSCollectionViewDiffableDataSource<Section, MountainsController.Mountain>(
+        collectionView: collectionView) {
             (collectionView: NSCollectionView,
             indexPath: IndexPath,
             identifier: Any) -> NSCollectionViewItem? in
@@ -41,10 +44,10 @@ extension MountainsWindowController {
     private func performQuery(with filter: String?) {
         let mountains = self.mountainsController.filteredMountains(with: filter).sorted { $0.name < $1.name }
 
-        let snapshot = NSDiffableDataSourceSnapshotReference()
-        snapshot.appendSections(withIdentifiers: [mainSection])
-        snapshot.appendItems(withIdentifiers: mountains)
-        dataSource.applySnapshot(snapshot, animatingDifferences: true)
+        var snapshot = NSDiffableDataSourceSnapshot<Section, MountainsController.Mountain>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(mountains)
+        dataSource.apply(snapshot, animatingDifferences: true)
     }
 }
 

@@ -9,9 +9,11 @@ import Cocoa
 
 class ListWindowController: NSWindowController {
 
-    private let mainSection = NSString(string: "main")
+    enum Section {
+        case main
+    }
 
-    private var dataSource: NSCollectionViewDiffableDataSourceReference!
+    private var dataSource: NSCollectionViewDiffableDataSource<Section, Int>! = nil
     @IBOutlet weak var collectionView: NSCollectionView!
 
     override func windowDidLoad() {
@@ -47,19 +49,18 @@ extension ListWindowController {
         collectionView.collectionViewLayout = createLayout()
     }
     private func configureDataSource() {
-        dataSource = NSCollectionViewDiffableDataSourceReference(collectionView: collectionView, itemProvider: {
-                (collectionView: NSCollectionView,
-                indexPath: IndexPath,
-                identifier: Any) -> NSCollectionViewItem? in
+        dataSource = NSCollectionViewDiffableDataSource
+            <Section, Int>(collectionView: collectionView, itemProvider: {
+                (collectionView: NSCollectionView, indexPath: IndexPath, identifier: Int) -> NSCollectionViewItem? in
             let item = collectionView.makeItem(withIdentifier: ListItem.reuseIdentifier, for: indexPath)
             item.textField?.stringValue = "\(identifier)"
             return item
         })
 
         // initial data
-        let snapshot = NSDiffableDataSourceSnapshotReference()
-        snapshot.appendSections(withIdentifiers: [mainSection])
-        snapshot.appendItems(withIdentifiers: Array(0..<94).map { NSNumber(value: $0) })
-        dataSource.applySnapshot(snapshot, animatingDifferences: false)
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Int>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(Array(0..<94))
+        dataSource.apply(snapshot, animatingDifferences: false)
     }
 }

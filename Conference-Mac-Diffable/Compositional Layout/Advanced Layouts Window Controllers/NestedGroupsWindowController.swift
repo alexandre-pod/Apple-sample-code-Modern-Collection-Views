@@ -9,10 +9,12 @@ import Cocoa
 
 class NestedGroupsWindowController: NSWindowController {
 
-    private let mainSection = NSString(string: "main")
+    enum Section {
+        case main
+    }
 
-    private var dataSource: NSCollectionViewDiffableDataSourceReference! = nil
-    @IBOutlet weak var groupsCollectionView: NSCollectionView!
+    private var dataSource: NSCollectionViewDiffableDataSource<Section, Int>! = nil
+    @IBOutlet weak var collectionView: NSCollectionView!
 
     override func windowDidLoad() {
         super.windowDidLoad()
@@ -74,18 +76,17 @@ extension NestedGroupsWindowController {
 extension NestedGroupsWindowController {
    private func configureHierarchy() {
         let textItemNib = NSNib(nibNamed: "TextItem", bundle: nil)
-        groupsCollectionView.register(textItemNib, forItemWithIdentifier: TextItem.reuseIdentifier)
+        collectionView.register(textItemNib, forItemWithIdentifier: TextItem.reuseIdentifier)
 
         let listItemNib = NSNib(nibNamed: "ListItem", bundle: nil)
-        groupsCollectionView.register(listItemNib, forItemWithIdentifier: ListItem.reuseIdentifier)
+        collectionView.register(listItemNib, forItemWithIdentifier: ListItem.reuseIdentifier)
 
-        groupsCollectionView.collectionViewLayout = createLayout()
+        collectionView.collectionViewLayout = createLayout()
     }
     private func configureDataSource() {
-        dataSource = NSCollectionViewDiffableDataSourceReference(collectionView: groupsCollectionView, itemProvider: {
-            (collectionView: NSCollectionView, indexPath: IndexPath, identifier: Any) -> NSCollectionViewItem? in
-            if let item = collectionView.makeItem(
-                withIdentifier: TextItem.reuseIdentifier, for: indexPath) as? TextItem {
+        dataSource = NSCollectionViewDiffableDataSource<Section, Int>(collectionView: collectionView, itemProvider: {
+            (collectionView: NSCollectionView, indexPath: IndexPath, identifier: Int) -> NSCollectionViewItem? in
+            if let item = collectionView.makeItem(withIdentifier: TextItem.reuseIdentifier, for: indexPath) as? TextItem {
                 item.textField?.stringValue = "\(indexPath.section), \(indexPath.item)"
                 if let box = item.view as? NSBox {
                     box.cornerRadius = 8
@@ -97,10 +98,10 @@ extension NestedGroupsWindowController {
         })
 
         // initial data
-        let snapshot = NSDiffableDataSourceSnapshotReference()
-        snapshot.appendSections(withIdentifiers: [mainSection])
-        snapshot.appendItems(withIdentifiers: Array(0..<100).map { NSNumber(value: $0) })
-        dataSource.applySnapshot(snapshot, animatingDifferences: false)
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Int>()
+        snapshot.appendSections([Section.main])
+        snapshot.appendItems(Array(0..<100))
+        dataSource.apply(snapshot, animatingDifferences: false)
 
     }
 }

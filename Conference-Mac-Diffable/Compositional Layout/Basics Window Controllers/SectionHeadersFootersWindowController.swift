@@ -12,8 +12,8 @@ class SectionHeadersFootersWindowController: NSWindowController {
     static let sectionHeaderElementKind = "section-header-element-kind"
     static let sectionFooterElementKind = "section-footer-element-kind"
 
-    private var dataSource: NSCollectionViewDiffableDataSourceReference! = nil
-    @IBOutlet weak var sectionCollectionView: NSCollectionView!
+    private var dataSource: NSCollectionViewDiffableDataSource<Int, Int>! = nil
+    @IBOutlet weak var collectionView: NSCollectionView!
 
     override func windowDidLoad() {
         super.windowDidLoad()
@@ -55,30 +55,28 @@ extension SectionHeadersFootersWindowController {
 extension SectionHeadersFootersWindowController {
     private func configureHierarchy() {
         let itemNib = NSNib(nibNamed: "TextItem", bundle: nil)
-        sectionCollectionView.register(itemNib, forItemWithIdentifier: TextItem.reuseIdentifier)
+        collectionView.register(itemNib, forItemWithIdentifier: TextItem.reuseIdentifier)
 
         let titleSupplementaryNib = NSNib(nibNamed: "TitleSupplementaryView", bundle: nil)
-        sectionCollectionView.register(titleSupplementaryNib,
+        collectionView.register(titleSupplementaryNib,
                     forSupplementaryViewOfKind: SectionHeadersFootersWindowController.sectionHeaderElementKind,
                     withIdentifier: TitleSupplementaryView.reuseIdentifier)
-        sectionCollectionView.register(titleSupplementaryNib,
+        collectionView.register(titleSupplementaryNib,
                     forSupplementaryViewOfKind: SectionHeadersFootersWindowController.sectionFooterElementKind,
                     withIdentifier: TitleSupplementaryView.reuseIdentifier)
 
-        sectionCollectionView.collectionViewLayout = createLayout()
+        collectionView.collectionViewLayout = createLayout()
     }
     private func configureDataSource() {
-        dataSource = NSCollectionViewDiffableDataSourceReference(collectionView: sectionCollectionView) {
-                (collectionView: NSCollectionView,
-                indexPath: IndexPath,
-                identifier: Any) -> NSCollectionViewItem? in
-                let item = self.sectionCollectionView.makeItem(withIdentifier: TextItem.reuseIdentifier, for: indexPath)
+        dataSource = NSCollectionViewDiffableDataSource<Int, Int>(collectionView: collectionView) {
+                (collectionView: NSCollectionView, indexPath: IndexPath, identifier: Int) -> NSCollectionViewItem? in
+            let item = collectionView.makeItem(withIdentifier: TextItem.reuseIdentifier, for: indexPath)
             item.textField?.stringValue = "\(indexPath.section),\(indexPath.item)"
             return item
         }
         dataSource.supplementaryViewProvider = {
-            (collectionView: NSCollectionView, kind: String, indexPath: IndexPath) -> NSView? in
-            if let supplementaryView = self.sectionCollectionView.makeSupplementaryView(
+            (collectionView: NSCollectionView, kind: String, indexPath: IndexPath) -> (NSView & NSCollectionViewElement)? in
+            if let supplementaryView = collectionView.makeSupplementaryView(
                 ofKind: kind,
                 withIdentifier: TitleSupplementaryView.reuseIdentifier,
                 for: indexPath) as? TitleSupplementaryView {
@@ -94,15 +92,13 @@ extension SectionHeadersFootersWindowController {
         // initial data
         let itemsPerSection = 5
         let sections = Array(0..<5)
-        let snapshot = NSDiffableDataSourceSnapshotReference()
+        var snapshot = NSDiffableDataSourceSnapshot<Int, Int>()
         var itemOffset = 0
         sections.forEach {
-            snapshot.appendSections(withIdentifiers: [NSNumber(value: $0)])
-            snapshot.appendItems(withIdentifiers: Array(itemOffset..<itemOffset + itemsPerSection).map {
-                NSNumber(value: $0)
-            })
+            snapshot.appendSections([$0])
+            snapshot.appendItems(Array(itemOffset..<itemOffset + itemsPerSection))
             itemOffset += itemsPerSection
         }
-        dataSource.applySnapshot(snapshot, animatingDifferences: false)
+        dataSource.apply(snapshot, animatingDifferences: false)
     }
 }

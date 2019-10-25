@@ -7,9 +7,9 @@ Abstract:
 
 import Cocoa
 
-class InsertionSortArray: NSObject {
+class InsertionSortArray: Hashable {
 
-    class SortNode: NSObject {
+    struct SortNode: Hashable {
         let value: Int
         let color: NSColor
 
@@ -19,14 +19,11 @@ class InsertionSortArray: NSObject {
             self.color = NSColor(hue: hue, saturation: 1.0, brightness: 1.0, alpha: 1.0)
         }
         private let identifier = UUID()
-
-        override var hash: Int {
-            return identifier.hashValue
+        func hash(into hasher: inout Hasher) {
+            hasher.combine(identifier)
         }
-
-        override func isEqual(_ object: Any?) -> Bool {
-            guard let otherNode = object as? SortNode else { return false }
-            return identifier == otherNode.identifier
+        static func == (lhs: SortNode, rhs: SortNode) -> Bool {
+            return lhs.identifier == rhs.identifier
         }
     }
     var values: [SortNode] {
@@ -41,12 +38,11 @@ class InsertionSortArray: NSObject {
     init(count: Int) {
         nodes = (0..<count).map { SortNode(value: $0, maxValue: count) }.shuffled()
     }
-    override var hash: Int {
-        return identifier.hashValue
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(identifier)
     }
-    override func isEqual(_ object: Any?) -> Bool {
-        guard let otherArray = object as? InsertionSortArray else { return false }
-        return identifier == otherArray.identifier
+    static func == (lhs: InsertionSortArray, rhs: InsertionSortArray) -> Bool {
+        return lhs.identifier == rhs.identifier
     }
     private var identifier = UUID()
     private var currentIndex = 1

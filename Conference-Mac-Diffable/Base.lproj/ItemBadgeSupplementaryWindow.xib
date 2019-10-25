@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14810.9" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="15505" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14810.9"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15505"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="ItemBadgeSupplementaryWindowController" customModule="WWDC_Mac_Diffable" customModuleProvider="target">
+        <customObject id="-2" userLabel="File's Owner" customClass="ItemBadgeSupplementaryWindowController" customModule="Conference_Mac_Diffable" customModuleProvider="target">
             <connections>
-                <outlet property="itemCollectionView" destination="oHO-xs-Qg0" id="rf3-rd-xkv"/>
+                <outlet property="collectionView" destination="oHO-xs-Qg0" id="wXJ-aE-oen"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="cTA-54-Avc"/>
             </connections>
         </customObject>
@@ -16,7 +16,7 @@
         <window title="Item Badges" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" frameAutosaveName="ItemBadges" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <rect key="contentRect" x="335" y="390" width="320" height="600"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1177"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
             <value key="minSize" type="size" width="320" height="240"/>
             <view key="contentView" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="600"/>

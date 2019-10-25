@@ -11,19 +11,21 @@ class DistinctSectionsWindowController: NSWindowController {
 
     enum SectionLayoutKind: Int, CaseIterable {
         case list, grid5, grid3
-        func columnCount() -> Int {
+        var columnCount: Int {
             switch self {
             case .grid3:
                 return 3
+
             case .grid5:
                 return 5
+
             case .list:
                 return 1
             }
         }
     }
 
-    private var dataSource: NSCollectionViewDiffableDataSourceReference! = nil
+    private var dataSource: NSCollectionViewDiffableDataSource<SectionLayoutKind, Int>! = nil
     @IBOutlet weak var collectionView: NSCollectionView!
 
     override func windowDidLoad() {
@@ -38,7 +40,7 @@ extension DistinctSectionsWindowController {
         let layout = NSCollectionViewCompositionalLayout {
             (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection in
             let sectionLayoutKind = SectionLayoutKind(rawValue: sectionIndex)!
-            let columns = sectionLayoutKind.columnCount()
+            let columns = sectionLayoutKind.columnCount
 
             // The `group` auto-calculates the actual item width to make the requested number of `columns` fit,
             // so this `widthDimension` will be ignored.
@@ -73,10 +75,8 @@ extension DistinctSectionsWindowController {
         collectionView.collectionViewLayout = createLayout()
     }
     private func configureDataSource() {
-        dataSource = NSCollectionViewDiffableDataSourceReference(collectionView: collectionView) {
-                (collectionView: NSCollectionView,
-                indexPath: IndexPath,
-                identifier: Any) -> NSCollectionViewItem? in
+        dataSource = NSCollectionViewDiffableDataSource<SectionLayoutKind, Int>(collectionView: collectionView) {
+                (collectionView: NSCollectionView, indexPath: IndexPath, identifier: Int) -> NSCollectionViewItem? in
             let section = SectionLayoutKind(rawValue: indexPath.section)!
             if section == .list {
                 if let item = collectionView.makeItem(
@@ -102,15 +102,13 @@ extension DistinctSectionsWindowController {
 
         // initial data
         let itemsPerSection = 10
-        let snapshot = NSDiffableDataSourceSnapshotReference()
+        var snapshot = NSDiffableDataSourceSnapshot<SectionLayoutKind, Int>()
         SectionLayoutKind.allCases.forEach {
-            snapshot.appendSections(withIdentifiers: [NSNumber(value: $0.rawValue)])
+            snapshot.appendSections([$0])
             let itemOffset = $0.rawValue * itemsPerSection
             let itemUpperbound = itemOffset + itemsPerSection
-            snapshot.appendItems(withIdentifiers: Array(itemOffset..<itemUpperbound).map {
-                NSNumber(value: $0)
-            })
+            snapshot.appendItems(Array(itemOffset..<itemUpperbound))
         }
-        dataSource.applySnapshot(snapshot, animatingDifferences: false)
+        dataSource.apply(snapshot, animatingDifferences: false)
     }
 }

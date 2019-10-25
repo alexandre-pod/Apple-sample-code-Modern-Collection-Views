@@ -9,10 +9,12 @@ import Cocoa
 
 class GridWindowController: NSWindowController {
 
-    private let mainSection = NSString(string: "main")
+    enum Section {
+        case main
+    }
 
-    private var dataSource: NSCollectionViewDiffableDataSourceReference! = nil
-    @IBOutlet weak var gridCollectionView: NSCollectionView!
+    private var dataSource: NSCollectionViewDiffableDataSource<Section, Int>! = nil
+    @IBOutlet weak var collectionView: NSCollectionView!
 
     override func windowDidLoad() {
         super.windowDidLoad()
@@ -40,24 +42,23 @@ extension GridWindowController {
 extension GridWindowController {
     private func configureHierarchy() {
         let itemNib = NSNib(nibNamed: "TextItem", bundle: nil)
-        gridCollectionView.register(itemNib, forItemWithIdentifier: TextItem.reuseIdentifier)
+        collectionView.register(itemNib, forItemWithIdentifier: TextItem.reuseIdentifier)
 
-        gridCollectionView.collectionViewLayout = createLayout()
+        collectionView.collectionViewLayout = createLayout()
     }
     private func configureDataSource() {
-        dataSource = NSCollectionViewDiffableDataSourceReference(collectionView: gridCollectionView, itemProvider: {
-                (collectionView: NSCollectionView,
-                indexPath: IndexPath,
-                identifier: Any) -> NSCollectionViewItem? in
+        dataSource = NSCollectionViewDiffableDataSource
+            <Section, Int>(collectionView: collectionView, itemProvider: {
+                (collectionView: NSCollectionView, indexPath: IndexPath, identifier: Int) -> NSCollectionViewItem? in
             let item = collectionView.makeItem(withIdentifier: TextItem.reuseIdentifier, for: indexPath)
             item.textField?.stringValue = "\(identifier)"
             return item
         })
 
         // initial data
-        let snapshot = NSDiffableDataSourceSnapshotReference()
-        snapshot.appendSections(withIdentifiers: [mainSection])
-        snapshot.appendItems(withIdentifiers: Array(0..<94).map { NSNumber(value: $0) })
-        dataSource.applySnapshot(snapshot, animatingDifferences: false)
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Int>()
+        snapshot.appendSections([Section.main])
+        snapshot.appendItems(Array(0..<94))
+        dataSource.apply(snapshot, animatingDifferences: false)
     }
 }

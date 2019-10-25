@@ -9,8 +9,8 @@ import Cocoa
 
 class OrthogonalScrollingWindowController: NSWindowController {
 
-    private var dataSource: NSCollectionViewDiffableDataSourceReference! = nil
-    @IBOutlet weak var orthCollectionView: NSCollectionView!
+    private var dataSource: NSCollectionViewDiffableDataSource<Int, Int>! = nil
+    @IBOutlet weak var collectionView: NSCollectionView!
 
     override func windowDidLoad() {
         super.windowDidLoad()
@@ -71,18 +71,17 @@ extension OrthogonalScrollingWindowController {
 extension OrthogonalScrollingWindowController {
    private func configureHierarchy() {
         let textItemNib = NSNib(nibNamed: "TextItem", bundle: nil)
-        orthCollectionView.register(textItemNib, forItemWithIdentifier: TextItem.reuseIdentifier)
+        collectionView.register(textItemNib, forItemWithIdentifier: TextItem.reuseIdentifier)
 
         let listItemNib = NSNib(nibNamed: "ListItem", bundle: nil)
-        orthCollectionView.register(listItemNib, forItemWithIdentifier: ListItem.reuseIdentifier)
+        collectionView.register(listItemNib, forItemWithIdentifier: ListItem.reuseIdentifier)
 
-        orthCollectionView.collectionViewLayout = createLayout()
+        collectionView.collectionViewLayout = createLayout()
     }
     private func configureDataSource() {
-        dataSource = NSCollectionViewDiffableDataSourceReference(collectionView: orthCollectionView, itemProvider: {
-            (collectionView: NSCollectionView, indexPath: IndexPath, identifier: Any) -> NSCollectionViewItem? in
-            if let item = collectionView.makeItem(
-                withIdentifier: TextItem.reuseIdentifier, for: indexPath) as? TextItem {
+        dataSource = NSCollectionViewDiffableDataSource<Int, Int>(collectionView: collectionView, itemProvider: {
+            (collectionView: NSCollectionView, indexPath: IndexPath, identifier: Int) -> NSCollectionViewItem? in
+            if let item = collectionView.makeItem(withIdentifier: TextItem.reuseIdentifier, for: indexPath) as? TextItem {
                 item.textField?.stringValue = "\(indexPath.section), \(indexPath.item)"
                 if let box = item.view as? NSBox {
                     box.cornerRadius = 8
@@ -94,9 +93,9 @@ extension OrthogonalScrollingWindowController {
         })
 
         // initial data
-        let snapshot = NSDiffableDataSourceSnapshotReference()
-        snapshot.appendSections(withIdentifiers: [NSNumber(value: 0)])
-        snapshot.appendItems(withIdentifiers: Array(0..<30).map { NSNumber(value: $0) })
-        dataSource.applySnapshot(snapshot, animatingDifferences: false)
+        var snapshot = NSDiffableDataSourceSnapshot<Int, Int>()
+        snapshot.appendSections([0])
+        snapshot.appendItems(Array(0..<30))
+        dataSource.apply(snapshot, animatingDifferences: false)
     }
 }
