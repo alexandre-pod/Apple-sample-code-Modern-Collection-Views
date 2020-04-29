@@ -40,6 +40,7 @@ extension OrthogonalScrollingViewController {
     //   | +---------------------------------+  +-----------+  |
     //   +-----------------------------------------------------+
 
+    /// - Tag: Orthogonal
     func createLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout {
             (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in

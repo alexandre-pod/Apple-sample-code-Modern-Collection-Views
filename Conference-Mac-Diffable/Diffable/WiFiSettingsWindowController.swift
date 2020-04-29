@@ -20,7 +20,7 @@ class WiFiSettingsWindowController: NSWindowController {
     struct Item: Hashable {
         let title: String
         let type: ItemType
-        let network: WIFIController.Network?
+        let network: WiFiController.Network?
 
         init(title: String, type: ItemType) {
             self.title = title
@@ -28,7 +28,7 @@ class WiFiSettingsWindowController: NSWindowController {
             self.network = nil
             self.identifier = UUID()
         }
-        init(network: WIFIController.Network) {
+        init(network: WiFiController.Network) {
             self.title = network.name
             self.type = .availableNetwork
             self.network = network
@@ -51,7 +51,7 @@ class WiFiSettingsWindowController: NSWindowController {
     @IBOutlet weak var collectionView: NSCollectionView! = nil
     private var dataSource: NSCollectionViewDiffableDataSource<Section, Item>! = nil
     private var currentSnapshot: NSDiffableDataSourceSnapshot<Section, Item>! = nil
-    private var wifiController: WIFIController! = nil
+    private var wifiController: WiFiController! = nil
     private lazy var configurationItems: [Item] = {
         return [Item(title: "Wi-Fi", type: .wifiEnabled),
                 Item(title: "breeno-net", type: .currentNetwork)]
@@ -77,7 +77,7 @@ extension WiFiSettingsWindowController {
 
     private func configureDataSource() {
 
-        wifiController = WIFIController { [weak self] (controller: WIFIController) in
+        wifiController = WiFiController { [weak self] (controller: WiFiController) in
             guard let self = self else { return }
             self.updateUI()
         }

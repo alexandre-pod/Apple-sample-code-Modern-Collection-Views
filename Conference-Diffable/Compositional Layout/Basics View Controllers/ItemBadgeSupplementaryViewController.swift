@@ -37,6 +37,7 @@ class ItemBadgeSupplementaryViewController: UIViewController {
 }
 
 extension ItemBadgeSupplementaryViewController {
+    /// - Tag: Badge
     func createLayout() -> UICollectionViewLayout {
         let badgeAnchor = NSCollectionLayoutAnchor(edges: [.top, .trailing], fractionalOffset: CGPoint(x: 0.3, y: -0.3))
         let badgeSize = NSCollectionLayoutSize(widthDimension: .absolute(20),

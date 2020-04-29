@@ -49,6 +49,7 @@ extension InsertionSortViewController {
         }
         configureNavItem()
     }
+    /// - Tag: InsertionSortStep
     func performSortStep() {
         if !isSorting {
             return
@@ -56,19 +57,19 @@ extension InsertionSortViewController {
 
         var sectionCountNeedingSort = 0
 
-        // grab the current state of the UI from the data source
+        // Get the current state of the UI from the data source.
         var updatedSnapshot = dataSource.snapshot()
 
-        // for each section, if needed, step through and perform the next sorting step
+        // For each section, if needed, step through and perform the next sorting step.
         updatedSnapshot.sectionIdentifiers.forEach {
             let section = $0
             if !section.isSorted {
 
-                // step the sort algorthim
+                // Step the sort algorithm.
                 section.sortNext()
                 let items = section.values
 
-                // replace our items for this section with the newly sorted items
+                // Replace the items for this section with the newly sorted items.
                 updatedSnapshot.deleteItems(items)
                 updatedSnapshot.appendItems(items, toSection: section)
 

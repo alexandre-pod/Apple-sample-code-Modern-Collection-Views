@@ -44,6 +44,7 @@ extension NestedGroupsViewController {
     //   | +---------------------------------+  +-----------+  |
     //   +-----------------------------------------------------+
 
+    /// - Tag: Nested
     func createLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout {
             (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in

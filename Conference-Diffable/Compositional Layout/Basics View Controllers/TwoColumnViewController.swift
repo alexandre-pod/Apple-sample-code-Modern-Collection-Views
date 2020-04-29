@@ -25,6 +25,7 @@ class TwoColumnViewController: UIViewController {
 }
 
 extension TwoColumnViewController {
+    /// - Tag: TwoColumn
     func createLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                              heightDimension: .fractionalHeight(1.0))

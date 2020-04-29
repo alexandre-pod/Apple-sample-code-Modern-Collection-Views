@@ -24,6 +24,7 @@ class SectionHeadersFootersViewController: UIViewController {
 }
 
 extension SectionHeadersFootersViewController {
+    /// - Tag: HeaderFooter
     func createLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                              heightDimension: .fractionalHeight(1.0))
@@ -53,6 +54,7 @@ extension SectionHeadersFootersViewController {
 }
 
 extension SectionHeadersFootersViewController {
+    /// - Tag: HeaderFooterRegister
     func configureHierarchy() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createLayout())
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]

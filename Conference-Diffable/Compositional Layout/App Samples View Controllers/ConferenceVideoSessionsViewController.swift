@@ -85,8 +85,7 @@ extension ConferenceVideoSessionsViewController {
     }
     func configureDataSource() {
         dataSource = UICollectionViewDiffableDataSource
-            <ConferenceVideoController.VideoCollection,
-            ConferenceVideoController.Video> (collectionView: collectionView) {
+            <ConferenceVideoController.VideoCollection, ConferenceVideoController.Video>(collectionView: collectionView) {
                 (collectionView: UICollectionView, indexPath: IndexPath,
                 video: ConferenceVideoController.Video) -> UICollectionViewCell? in
 

@@ -7,7 +7,7 @@ Controller object which notifies our application when availalbe Wi-Fi APs are av
 
 import Foundation
 
-class WIFIController {
+class WiFiController {
 
     struct Network: Hashable {
         let name: String
@@ -21,7 +21,7 @@ class WIFIController {
         }
     }
 
-    typealias UpdateHandler = (WIFIController) -> Void
+    typealias UpdateHandler = (WiFiController) -> Void
 
     init(updateHandler: @escaping UpdateHandler) {
         self.updateHandler = updateHandler
@@ -99,7 +99,7 @@ class WIFIController {
     }
 
     func updateAvailableNetworks(_ networks: [Network]) {
-        _availableNetworks = Set<Network> (networks)
+        _availableNetworks = Set<Network>(networks)
         _availableNetworksDict.removeAll()
         for network in _availableNetworks {
             _availableNetworksDict[network.identifier] = network

@@ -25,6 +25,7 @@ class ListViewController: UIViewController {
 }
 
 extension ListViewController {
+    /// - Tag: List
     private func createLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                              heightDimension: .fractionalHeight(1.0))

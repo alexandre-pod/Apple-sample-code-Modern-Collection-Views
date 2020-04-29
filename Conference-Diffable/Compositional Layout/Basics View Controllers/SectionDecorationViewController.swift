@@ -24,6 +24,7 @@ class SectionDecorationViewController: UIViewController {
 }
 
 extension SectionDecorationViewController {
+    /// - Tag: Background
     func createLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                              heightDimension: .fractionalHeight(1.0))
@@ -36,7 +37,7 @@ extension SectionDecorationViewController {
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = 5
         section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
-
+        
         let sectionBackgroundDecoration = NSCollectionLayoutDecorationItem.background(
             elementKind: SectionDecorationViewController.sectionBackgroundDecorationElementKind)
         sectionBackgroundDecoration.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)

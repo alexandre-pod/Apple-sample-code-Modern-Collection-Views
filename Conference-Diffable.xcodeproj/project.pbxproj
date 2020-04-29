@@ -14,7 +14,7 @@
 		053A00D722837ED000C5D56F /* TextItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053A00C822837ED000C5D56F /* TextItem.swift */; };
 		053A00D822837ED000C5D56F /* TitleSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053A00C922837ED000C5D56F /* TitleSupplementaryView.swift */; };
 		053A00E022837EDE00C5D56F /* WiFiNetworkItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053A00DD22837EDE00C5D56F /* WiFiNetworkItem.swift */; };
-		053A00E622837F4800C5D56F /* WIFIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1BB0AA225FA81D003ADF88 /* WIFIController.swift */; };
+		053A00E622837F4800C5D56F /* WiFiController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1BB0AA225FA81D003ADF88 /* WiFiController.swift */; };
 		0586E2662297999700594D93 /* InsertionSortWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0586E2652297999700594D93 /* InsertionSortWindowController.swift */; };
 		0586E26C22979E5400594D93 /* InsertionSortItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0586E26B22979E5400594D93 /* InsertionSortItem.swift */; };
 		0586E2712297A0AC00594D93 /* InsertionSortArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0586E2702297A0AC00594D93 /* InsertionSortArray.swift */; };
@@ -57,7 +57,7 @@
 		FD09E6D62276BF030009D23B /* PinnedSectionHeaderFooterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD09E6D52276BF030009D23B /* PinnedSectionHeaderFooterViewController.swift */; };
 		FD1BB0A7225F9257003ADF88 /* OutlineItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1BB0A6225F9257003ADF88 /* OutlineItemCell.swift */; };
 		FD1BB0A9225FA802003ADF88 /* WiFiSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1BB0A8225FA802003ADF88 /* WiFiSettingsViewController.swift */; };
-		FD1BB0AB225FA81D003ADF88 /* WIFIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1BB0AA225FA81D003ADF88 /* WIFIController.swift */; };
+		FD1BB0AB225FA81D003ADF88 /* WiFiController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1BB0AA225FA81D003ADF88 /* WiFiController.swift */; };
 		FD20C3C82268D99100935CB2 /* ConferenceVideoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD20C3C72268D99100935CB2 /* ConferenceVideoController.swift */; };
 		FD2A161C22A0B05400418F29 /* MountainsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2A161B22A0B05400418F29 /* MountainsController.swift */; };
 		FD48D9C0227E85F8002F1D62 /* ConferenceNewsFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD48D9BF227E85F8002F1D62 /* ConferenceNewsFeedViewController.swift */; };
@@ -141,6 +141,7 @@
 		573612CB22A1CDA800671B03 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = "Conference-Mac-Diffable/Base.lproj/SectionHeadersFootersWindow.xib"; sourceTree = SOURCE_ROOT; };
 		573612CD22A1CDA900671B03 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = "Conference-Mac-Diffable/Base.lproj/TwoColumnWindow.xib"; sourceTree = SOURCE_ROOT; };
 		5777C884229910E100AEF7BB /* MountainsRawData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MountainsRawData.swift; sourceTree = "<group>"; };
+		699CA3DA2383663700B50951 /* Conference-Diffable.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Conference-Diffable.entitlements"; sourceTree = "<group>"; };
 		6A98C7F3ECCD0837A587C8A9 /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE.txt; sourceTree = "<group>"; };
 		E8E6ED6DC6EF1E1B8C6DCEEA /* SampleCode.xcconfig */ = {isa = PBXFileReference; name = SampleCode.xcconfig; path = Configuration/SampleCode.xcconfig; sourceTree = "<group>"; };
 		FD000CB922F0E68100AE3B95 /* TableViewEditingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewEditingViewController.swift; sourceTree = "<group>"; };
@@ -148,7 +149,7 @@
 		FD09E6D52276BF030009D23B /* PinnedSectionHeaderFooterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinnedSectionHeaderFooterViewController.swift; sourceTree = "<group>"; };
 		FD1BB0A6225F9257003ADF88 /* OutlineItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlineItemCell.swift; sourceTree = "<group>"; };
 		FD1BB0A8225FA802003ADF88 /* WiFiSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiFiSettingsViewController.swift; sourceTree = "<group>"; };
-		FD1BB0AA225FA81D003ADF88 /* WIFIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WIFIController.swift; sourceTree = "<group>"; };
+		FD1BB0AA225FA81D003ADF88 /* WiFiController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiFiController.swift; sourceTree = "<group>"; };
 		FD20C3C72268D99100935CB2 /* ConferenceVideoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceVideoController.swift; sourceTree = "<group>"; };
 		FD20C3CD2268DA5100935CB2 /* ConferenceVideoSessionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceVideoSessionsViewController.swift; sourceTree = "<group>"; };
 		FD2A161B22A0B05400418F29 /* MountainsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MountainsController.swift; sourceTree = "<group>"; };
@@ -339,7 +340,7 @@
 				FD65E180227637C300F8AF46 /* Cells And Supplementary Views */,
 				FD65E1812276394000F8AF46 /* MountainsViewController.swift */,
 				FD74C13D2287E99600B3A8EE /* InsertionSortViewController.swift */,
-				FD1BB0AA225FA81D003ADF88 /* WIFIController.swift */,
+				FD1BB0AA225FA81D003ADF88 /* WiFiController.swift */,
 				FD2A161B22A0B05400418F29 /* MountainsController.swift */,
 				5777C884229910E100AEF7BB /* MountainsRawData.swift */,
 				FD1BB0A8225FA802003ADF88 /* WiFiSettingsViewController.swift */,
@@ -453,6 +454,7 @@
 		FDA8D139225F8531000127E1 /* Conference-Diffable */ = {
 			isa = PBXGroup;
 			children = (
+				699CA3DA2383663700B50951 /* Conference-Diffable.entitlements */,
 				FD65E17D227636F600F8AF46 /* Compositional Layout */,
 				FD65E17C227636F000F8AF46 /* Diffable */,
 				FDA8D13C225F8531000127E1 /* OutlineViewController.swift */,
@@ -600,7 +602,7 @@
 				05C43D6E228A6A32002750F0 /* ItemBadgeSupplementaryWindowController.swift in Sources */,
 				0586E2662297999700594D93 /* InsertionSortWindowController.swift in Sources */,
 				05C43D6B228A67AA002750F0 /* DistinctSectionsWindowController.swift in Sources */,
-				053A00E622837F4800C5D56F /* WIFIController.swift in Sources */,
+				053A00E622837F4800C5D56F /* WiFiController.swift in Sources */,
 				05B367FF22A0D8E800D7A9E0 /* MountainsController.swift in Sources */,
 				053A00AA22837E6E00C5D56F /* AppDelegate.swift in Sources */,
 				053A00E022837EDE00C5D56F /* WiFiNetworkItem.swift in Sources */,
@@ -623,7 +625,7 @@
 				FDD8A183226FB67000CA5179 /* ListViewController.swift in Sources */,
 				FD2A161C22A0B05400418F29 /* MountainsController.swift in Sources */,
 				FD74C13E2287E99600B3A8EE /* InsertionSortViewController.swift in Sources */,
-				FD1BB0AB225FA81D003ADF88 /* WIFIController.swift in Sources */,
+				FD1BB0AB225FA81D003ADF88 /* WiFiController.swift in Sources */,
 				FD48D9C0227E85F8002F1D62 /* ConferenceNewsFeedViewController.swift in Sources */,
 				FDCFA2992286995D00D658EB /* SectionBackgroundDecorationView.swift in Sources */,
 				FDA8D13D225F8531000127E1 /* OutlineViewController.swift in Sources */,
@@ -1017,8 +1019,10 @@
 			baseConfigurationReference = E8E6ED6DC6EF1E1B8C6DCEEA /* SampleCode.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Conference-Diffable/Conference-Diffable.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "Conference-Diffable/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1029,6 +1033,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1040,8 +1045,10 @@
 			baseConfigurationReference = E8E6ED6DC6EF1E1B8C6DCEEA /* SampleCode.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Conference-Diffable/Conference-Diffable.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "Conference-Diffable/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1052,6 +1059,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

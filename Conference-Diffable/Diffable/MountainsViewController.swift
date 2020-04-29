@@ -28,6 +28,7 @@ class MountainsViewController: UIViewController {
 }
 
 extension MountainsViewController {
+    /// - Tag: MountainsDataSource
     func configureDataSource() {
         dataSource = UICollectionViewDiffableDataSource
             <Section, MountainsController.Mountain>(collectionView: mountainsCollectionView) {
@@ -40,6 +41,7 @@ extension MountainsViewController {
             return mountainCell
         }
     }
+    /// - Tag: MountainsPerformQuery
     func performQuery(with filter: String?) {
         let mountains = mountainsController.filteredMountains(with: filter).sorted { $0.name < $1.name }
 

@@ -37,6 +37,7 @@ class DistinctSectionsViewController: UIViewController {
 }
 
 extension DistinctSectionsViewController {
+    /// - Tag: PerSection
     func createLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int,
             layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
@@ -44,8 +45,8 @@ extension DistinctSectionsViewController {
             guard let sectionLayoutKind = SectionLayoutKind(rawValue: sectionIndex) else { return nil }
             let columns = sectionLayoutKind.columnCount
 
-            // The `group` auto-calculates the actual item width to make
-            // the requested number of `columns` fit, so this `widthDimension` will be ignored.
+            // The group auto-calculates the actual item width to make
+            // the requested number of columns fit, so this widthDimension is ignored.
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                  heightDimension: .fractionalHeight(1.0))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)

@@ -24,6 +24,7 @@ class PinnedSectionHeaderFooterViewController: UIViewController {
 }
 
 extension PinnedSectionHeaderFooterViewController {
+    /// - Tag: PinnedHeader
     func createLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                              heightDimension: .fractionalHeight(1.0))
@@ -57,6 +58,7 @@ extension PinnedSectionHeaderFooterViewController {
 }
 
 extension PinnedSectionHeaderFooterViewController {
+    /// - Tag: PinnedHeaderRegister
     func configureHierarchy() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createLayout())
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]

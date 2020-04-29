@@ -74,7 +74,7 @@ class OutlineViewController: UIViewController {
                                     viewController: ItemBadgeSupplementaryViewController.self),
                         OutlineItem(title: "Section Headers/Footers", indentLevel: 3,
                                     viewController: SectionHeadersFootersViewController.self),
-                        OutlineItem(title: "Pinnned Section Headers", indentLevel: 3,
+                        OutlineItem(title: "Pinned Section Headers", indentLevel: 3,
                                     viewController: PinnedSectionHeaderFooterViewController.self)
                         ]),
                     OutlineItem(title: "Section Background Decoration", indentLevel: 2,

@@ -20,7 +20,7 @@ class WiFiSettingsViewController: UIViewController {
     struct Item: Hashable {
         let title: String
         let type: ItemType
-        let network: WIFIController.Network?
+        let network: WiFiController.Network?
 
         init(title: String, type: ItemType) {
             self.title = title
@@ -28,7 +28,7 @@ class WiFiSettingsViewController: UIViewController {
             self.network = nil
             self.identifier = UUID()
         }
-        init(network: WIFIController.Network) {
+        init(network: WiFiController.Network) {
             self.title = network.name
             self.type = .availableNetwork
             self.network = network
@@ -51,7 +51,7 @@ class WiFiSettingsViewController: UIViewController {
     let tableView = UITableView(frame: .zero, style: .insetGrouped)
     var dataSource: UITableViewDiffableDataSource<Section, Item>! = nil
     var currentSnapshot: NSDiffableDataSourceSnapshot<Section, Item>! = nil
-    var wifiController: WIFIController! = nil
+    var wifiController: WiFiController! = nil
     lazy var configurationItems: [Item] = {
         return [Item(title: "Wi-Fi", type: .wifiEnabled),
                 Item(title: "breeno-net", type: .currentNetwork)]
@@ -71,7 +71,7 @@ class WiFiSettingsViewController: UIViewController {
 extension WiFiSettingsViewController {
 
     func configureDataSource() {
-        wifiController = WIFIController { [weak self] (controller: WIFIController) in
+        wifiController = WiFiController { [weak self] (controller: WiFiController) in
             guard let self = self else { return }
             self.updateUI()
         }
@@ -113,6 +113,7 @@ extension WiFiSettingsViewController {
         wifiController.scanForNetworks = true
     }
 
+    /// - Tag: WiFiUpdate
     func updateUI(animated: Bool = true) {
         guard let controller = self.wifiController else { return }
 

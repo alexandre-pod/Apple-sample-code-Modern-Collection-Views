@@ -25,6 +25,7 @@ class GridViewController: UIViewController {
 }
 
 extension GridViewController {
+    /// - Tag: Grid
     private func createLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.2),
                                              heightDimension: .fractionalHeight(1.0))

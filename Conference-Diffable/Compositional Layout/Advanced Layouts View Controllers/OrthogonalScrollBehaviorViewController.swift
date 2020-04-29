@@ -10,6 +10,7 @@ import UIKit
 class OrthogonalScrollBehaviorViewController: UIViewController {
     static let headerElementKind = "header-element-kind"
 
+    /// - Tag: OrthogonalBehavior
     enum SectionKind: Int, CaseIterable {
         case continuous, continuousGroupLeadingBoundary, paging, groupPaging, groupPagingCentered, none
         func orthogonalScrollingBehavior() -> UICollectionLayoutSectionOrthogonalScrollingBehavior {

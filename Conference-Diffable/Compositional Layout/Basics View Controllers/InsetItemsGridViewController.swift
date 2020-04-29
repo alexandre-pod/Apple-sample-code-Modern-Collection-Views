@@ -25,6 +25,7 @@ class InsetItemsGridViewController: UIViewController {
 }
 
 extension InsetItemsGridViewController {
+    /// - Tag: Inset
     func createLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.2),
                                              heightDimension: .fractionalHeight(1.0))
