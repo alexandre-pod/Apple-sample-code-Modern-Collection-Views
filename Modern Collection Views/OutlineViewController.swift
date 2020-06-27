@@ -95,12 +95,16 @@ class OutlineViewController: UIViewController {
                 ]),
             OutlineItem(title: "Lists", subitems: [
                 OutlineItem(title: "Simple List", viewController: SimpleListViewController.self),
+                OutlineItem(title: "Reorderable List", viewController: ReorderableListViewController.self),
                 OutlineItem(title: "List Appearances", viewController: ListAppearancesViewController.self),
                 OutlineItem(title: "List with Custom Cells", viewController: CustomCellListViewController.self)
             ]),
             OutlineItem(title: "Outlines", subitems: [
                 OutlineItem(title: "Emoji Explorer", viewController: EmojiExplorerViewController.self),
                 OutlineItem(title: "Emoji Explorer - List", viewController: EmojiExplorerListViewController.self)
+            ]),
+            OutlineItem(title: "Cell Configurations", subitems: [
+                OutlineItem(title: "Custom Configurations", viewController: CustomConfigurationViewController.self)
             ])
         ]
     }()

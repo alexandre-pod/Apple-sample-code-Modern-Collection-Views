@@ -91,7 +91,13 @@ extension EmojiExplorerViewController {
 
             // list
             } else if sectionKind == .list {
-                section = NSCollectionLayoutSection.list(using: .init(appearance: .insetGrouped), layoutEnvironment: layoutEnvironment)
+                var configuration = UICollectionLayoutListConfiguration(appearance: .insetGrouped)
+                configuration.leadingSwipeActionsConfigurationProvider = { [weak self] (indexPath) in
+                    guard let self = self else { return nil }
+                    guard let item = self.dataSource.itemIdentifier(for: indexPath) else { return nil }
+                    return self.leadingSwipeActionConfigurationForListCellItem(item)
+                }
+                section = NSCollectionLayoutSection.list(using: configuration, layoutEnvironment: layoutEnvironment)
             } else {
                 fatalError("Unknown section!")
             }
@@ -153,7 +159,6 @@ extension EmojiExplorerViewController {
                     UIView.animate(withDuration: 0.2) {
                         cell.accessories = self.accessoriesForListCellItem(item)
                     }
-                    cell.leadingSwipeActionsConfiguration = self.leadingSwipeActionConfigurationForListCellItem(item)
                 }
             }
             
@@ -207,7 +212,6 @@ extension EmojiExplorerViewController {
             content.secondaryText = String(describing: emoji.category)
             cell.contentConfiguration = content
             cell.accessories = self.accessoriesForListCellItem(item)
-            cell.leadingSwipeActionsConfiguration = self.leadingSwipeActionConfigurationForListCellItem(item)
         }
     }
     

@@ -53,13 +53,15 @@
 		1F368613249854110077BA6A /* BadgeSupplementaryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F3685FF249854110077BA6A /* BadgeSupplementaryView.xib */; };
 		376EB4BB248AF3F4005C5393 /* ListAppearancesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376EB4BA248AF3F4005C5393 /* ListAppearancesViewController.swift */; };
 		379E24DC2489E53B0040C9B5 /* CustomCellListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379E24DB2489E53B0040C9B5 /* CustomCellListViewController.swift */; };
+		37B1C17224A2E6660041C9F6 /* CustomConfigurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B1C17024A2E6660041C9F6 /* CustomConfigurations.swift */; };
+		37B1C17324A2E6660041C9F6 /* CustomConfigurationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B1C17124A2E6660041C9F6 /* CustomConfigurationViewController.swift */; };
 		5777C885229910E100AEF7BB /* MountainsRawData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5777C884229910E100AEF7BB /* MountainsRawData.swift */; };
 		57F0E355247D8C4100821591 /* SimpleListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F0E354247D8C4100821591 /* SimpleListViewController.swift */; };
 		67AD57CC248ACDAF00D9E73E /* EmojiDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67AD57CB248ACDAF00D9E73E /* EmojiDetailViewController.swift */; };
 		FD000CBA22F0E68100AE3B95 /* TableViewEditingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD000CB922F0E68100AE3B95 /* TableViewEditingViewController.swift */; };
+		FD002CD024A38A28004178C8 /* ReorderableListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD002CCF24A38A28004178C8 /* ReorderableListViewController.swift */; };
 		FD09E6D42276BC250009D23B /* SectionHeadersFootersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD09E6D32276BC250009D23B /* SectionHeadersFootersViewController.swift */; };
 		FD09E6D62276BF030009D23B /* PinnedSectionHeaderFooterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD09E6D52276BF030009D23B /* PinnedSectionHeaderFooterViewController.swift */; };
-		FD1BB0A7225F9257003ADF88 /* OutlineItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1BB0A6225F9257003ADF88 /* OutlineItemCell.swift */; };
 		FD1BB0A9225FA802003ADF88 /* WiFiSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1BB0A8225FA802003ADF88 /* WiFiSettingsViewController.swift */; };
 		FD1BB0AB225FA81D003ADF88 /* WiFiController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1BB0AA225FA81D003ADF88 /* WiFiController.swift */; };
 		FD20C3C82268D99100935CB2 /* ConferenceVideoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD20C3C72268D99100935CB2 /* ConferenceVideoController.swift */; };
@@ -148,6 +150,8 @@
 		1F3685FF249854110077BA6A /* BadgeSupplementaryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BadgeSupplementaryView.xib; sourceTree = "<group>"; };
 		376EB4BA248AF3F4005C5393 /* ListAppearancesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListAppearancesViewController.swift; sourceTree = "<group>"; };
 		379E24DB2489E53B0040C9B5 /* CustomCellListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellListViewController.swift; sourceTree = "<group>"; };
+		37B1C17024A2E6660041C9F6 /* CustomConfigurations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomConfigurations.swift; sourceTree = "<group>"; };
+		37B1C17124A2E6660041C9F6 /* CustomConfigurationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomConfigurationViewController.swift; sourceTree = "<group>"; };
 		5777C884229910E100AEF7BB /* MountainsRawData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MountainsRawData.swift; sourceTree = "<group>"; };
 		57F0E354247D8C4100821591 /* SimpleListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleListViewController.swift; sourceTree = "<group>"; };
 		5AEBA7C0AB13D40C88941D7F /* SampleCode.xcconfig */ = {isa = PBXFileReference; name = SampleCode.xcconfig; path = Configuration/SampleCode.xcconfig; sourceTree = "<group>"; };
@@ -155,9 +159,9 @@
 		699CA3DA2383663700B50951 /* Modern Collection Views.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Modern Collection Views.entitlements"; sourceTree = "<group>"; };
 		85AA89463B64A375ADFAD7E9 /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE.txt; sourceTree = "<group>"; };
 		FD000CB922F0E68100AE3B95 /* TableViewEditingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewEditingViewController.swift; sourceTree = "<group>"; };
+		FD002CCF24A38A28004178C8 /* ReorderableListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReorderableListViewController.swift; sourceTree = "<group>"; };
 		FD09E6D32276BC250009D23B /* SectionHeadersFootersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeadersFootersViewController.swift; sourceTree = "<group>"; };
 		FD09E6D52276BF030009D23B /* PinnedSectionHeaderFooterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinnedSectionHeaderFooterViewController.swift; sourceTree = "<group>"; };
-		FD1BB0A6225F9257003ADF88 /* OutlineItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlineItemCell.swift; sourceTree = "<group>"; };
 		FD1BB0A8225FA802003ADF88 /* WiFiSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiFiSettingsViewController.swift; sourceTree = "<group>"; };
 		FD1BB0AA225FA81D003ADF88 /* WiFiController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiFiController.swift; sourceTree = "<group>"; };
 		FD20C3C72268D99100935CB2 /* ConferenceVideoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceVideoController.swift; sourceTree = "<group>"; };
@@ -328,6 +332,15 @@
 			name = Configuration;
 			sourceTree = "<group>";
 		};
+		37B1C16F24A2E6650041C9F6 /* Cell Configurations */ = {
+			isa = PBXGroup;
+			children = (
+				37B1C17024A2E6660041C9F6 /* CustomConfigurations.swift */,
+				37B1C17124A2E6660041C9F6 /* CustomConfigurationViewController.swift */,
+			);
+			path = "Cell Configurations";
+			sourceTree = "<group>";
+		};
 		3A98C7F0C03B4169C6F1CB8D /* LICENSE */ = {
 			isa = PBXGroup;
 			children = (
@@ -342,6 +355,7 @@
 			children = (
 				57F0E354247D8C4100821591 /* SimpleListViewController.swift */,
 				376EB4BA248AF3F4005C5393 /* ListAppearancesViewController.swift */,
+				FD002CCF24A38A28004178C8 /* ReorderableListViewController.swift */,
 				379E24DB2489E53B0040C9B5 /* CustomCellListViewController.swift */,
 			);
 			path = Lists;
@@ -491,8 +505,8 @@
 				FD65E17D227636F600F8AF46 /* Compositional Layout */,
 				FD65E17C227636F000F8AF46 /* Diffable */,
 				57F0E353247D873000821591 /* Lists */,
+				37B1C16F24A2E6650041C9F6 /* Cell Configurations */,
 				FDA8D13C225F8531000127E1 /* OutlineViewController.swift */,
-				FD1BB0A6225F9257003ADF88 /* OutlineItemCell.swift */,
 				FDA8D13E225F8531000127E1 /* Main.storyboard */,
 				FDA8D141225F8533000127E1 /* Assets.xcassets */,
 				FDA8D143225F8533000127E1 /* LaunchScreen.storyboard */,
@@ -663,8 +677,10 @@
 				FDCFA2992286995D00D658EB /* SectionBackgroundDecorationView.swift in Sources */,
 				376EB4BB248AF3F4005C5393 /* ListAppearancesViewController.swift in Sources */,
 				FDA8D13D225F8531000127E1 /* OutlineViewController.swift in Sources */,
+				37B1C17324A2E6660041C9F6 /* CustomConfigurationViewController.swift in Sources */,
 				67AD57CC248ACDAF00D9E73E /* EmojiDetailViewController.swift in Sources */,
 				FD74C13C2287DEC400B3A8EE /* InsertionSortArray.swift in Sources */,
+				FD002CD024A38A28004178C8 /* ReorderableListViewController.swift in Sources */,
 				FD65E1792276227B00F8AF46 /* OrthogonalScrollingViewController.swift in Sources */,
 				FD09E6D42276BC250009D23B /* SectionHeadersFootersViewController.swift in Sources */,
 				FD9671C22268EF6900301EBB /* ConferenceVideoSessionsViewController.swift in Sources */,
@@ -681,9 +697,9 @@
 				FD65E17B22762ADB00F8AF46 /* OrthogonalScrollBehaviorViewController.swift in Sources */,
 				5777C885229910E100AEF7BB /* MountainsRawData.swift in Sources */,
 				FD96B24D248859C300703C61 /* EmojiExplorerViewController.swift in Sources */,
-				FD1BB0A7225F9257003ADF88 /* OutlineItemCell.swift in Sources */,
 				FDEAF76124889A1F00C9AE07 /* EmojiExplorerListViewController.swift in Sources */,
 				FD65E1882276444F00F8AF46 /* ItemBadgeSupplementaryViewController.swift in Sources */,
+				37B1C17224A2E6660041C9F6 /* CustomConfigurations.swift in Sources */,
 				FD96B24B248859B900703C61 /* Emoji.swift in Sources */,
 				FDD8A181226FB1B300CA5179 /* GridViewController.swift in Sources */,
 				FDCE3654226901C000F3035B /* ConferenceVideoCell.swift in Sources */,

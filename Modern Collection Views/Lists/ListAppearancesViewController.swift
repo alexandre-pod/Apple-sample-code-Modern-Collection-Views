@@ -82,16 +82,9 @@ extension ListAppearancesViewController {
     
     private func configureDataSource() {
         
-        let headerRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, Item> { [weak self] (cell, indexPath, item) in
-            guard let self = self else { return }
-            
+        let headerRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, Item> { (cell, indexPath, item) in
             var content = cell.defaultContentConfiguration()
-            switch self.appearance {
-            case .grouped, .insetGrouped:
-                content.text = item.title?.localizedUppercase
-            default:
-                content.text = item.title
-            }
+            content.text = item.title
             cell.contentConfiguration = content
             
             cell.accessories = [.outlineDisclosure()]

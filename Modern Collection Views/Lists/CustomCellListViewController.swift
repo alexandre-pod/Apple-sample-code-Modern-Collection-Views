@@ -162,10 +162,12 @@ private class CustomListCell: ItemListCell {
         contentView.addSubview(categoryLabel)
         contentView.addSubview(categoryIconView)
         listContentView.translatesAutoresizingMaskIntoConstraints = false
+        let defaultHorizontalCompressionResistance = listContentView.contentCompressionResistancePriority(for: .horizontal)
+        listContentView.setContentCompressionResistancePriority(defaultHorizontalCompressionResistance - 1, for: .horizontal)
         categoryLabel.translatesAutoresizingMaskIntoConstraints = false
         categoryIconView.translatesAutoresizingMaskIntoConstraints = false
         let constraints = (
-            categoryLabelLeading: categoryLabel.leadingAnchor.constraint(equalTo: listContentView.trailingAnchor),
+            categoryLabelLeading: categoryLabel.leadingAnchor.constraint(greaterThanOrEqualTo: listContentView.trailingAnchor),
             categoryLabelTrailing: categoryIconView.leadingAnchor.constraint(equalTo: categoryLabel.trailingAnchor),
             categoryIconTrailing: contentView.trailingAnchor.constraint(equalTo: categoryIconView.trailingAnchor)
         )
