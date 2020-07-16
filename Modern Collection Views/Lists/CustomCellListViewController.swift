@@ -184,6 +184,17 @@ private class CustomListCell: ItemListCell {
         customViewConstraints = constraints
     }
     
+    private var separatorConstraint: NSLayoutConstraint?
+    private func updateSeparatorConstraint() {
+        guard let textLayoutGuide = listContentView.textLayoutGuide else { return }
+        if let existingConstraint = separatorConstraint, existingConstraint.isActive {
+            return
+        }
+        let constraint = separatorLayoutGuide.leadingAnchor.constraint(equalTo: textLayoutGuide.leadingAnchor)
+        constraint.isActive = true
+        separatorConstraint = constraint
+    }
+    
     override func updateConfiguration(using state: UICellConfigurationState) {
         setupViewsIfNeeded()
         
@@ -215,5 +226,6 @@ private class CustomListCell: ItemListCell {
         customViewConstraints?.categoryLabelLeading.constant = content.directionalLayoutMargins.trailing
         customViewConstraints?.categoryLabelTrailing.constant = valueConfiguration.textToSecondaryTextHorizontalPadding
         customViewConstraints?.categoryIconTrailing.constant = content.directionalLayoutMargins.trailing
+        updateSeparatorConstraint()
     }
 }
