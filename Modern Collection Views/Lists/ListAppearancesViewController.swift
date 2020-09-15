@@ -65,7 +65,7 @@ class ListAppearancesViewController: UIViewController {
 
 extension ListAppearancesViewController {
     private func createLayout() -> UICollectionViewLayout {
-        return UICollectionViewCompositionalLayout { section, layoutEnvironment in
+        return UICollectionViewCompositionalLayout { [unowned self] section, layoutEnvironment in
             var config = UICollectionLayoutListConfiguration(appearance: self.appearance)
             config.headerMode = .firstItemInSection
             return NSCollectionLayoutSection.list(using: config, layoutEnvironment: layoutEnvironment)
