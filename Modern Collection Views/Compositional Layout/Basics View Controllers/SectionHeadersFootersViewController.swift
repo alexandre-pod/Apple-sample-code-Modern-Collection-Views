@@ -54,7 +54,6 @@ extension SectionHeadersFootersViewController {
 }
 
 extension SectionHeadersFootersViewController {
-    /// - Tag: HeaderFooterRegister
     func configureHierarchy() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createLayout())
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -62,6 +61,7 @@ extension SectionHeadersFootersViewController {
         view.addSubview(collectionView)
         collectionView.delegate = self
     }
+    /// - Tag: SupplementaryRegistration
     func configureDataSource() {
         
         let cellRegistration = UICollectionView.CellRegistration<ListCell, Int> { (cell, indexPath, identifier) in

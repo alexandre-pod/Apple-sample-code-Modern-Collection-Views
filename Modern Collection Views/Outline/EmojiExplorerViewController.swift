@@ -63,6 +63,7 @@ extension EmojiExplorerViewController {
         view.addSubview(collectionView)
     }
     
+    /// - Tag: CreateFullLayout
     func createLayout() -> UICollectionViewLayout {
         
         let sectionProvider = { (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
@@ -204,6 +205,7 @@ extension EmojiExplorerViewController {
         }
     }
     
+    /// - Tag: ConfigureListCell
     func configuredListCell() -> UICollectionView.CellRegistration<UICollectionViewListCell, Item> {
         return UICollectionView.CellRegistration<UICollectionViewListCell, Item> { [weak self] (cell, indexPath, item) in
             guard let self = self, let emoji = item.emoji else { return }
@@ -215,6 +217,7 @@ extension EmojiExplorerViewController {
         }
     }
     
+    /// - Tag: DequeueCells
     func configureDataSource() {
         // data source
         dataSource = UICollectionViewDiffableDataSource<Section, Item>(collectionView: collectionView) {
@@ -235,6 +238,7 @@ extension EmojiExplorerViewController {
         }
     }
     
+    /// - Tag: SectionSnapshot
     func applyInitialSnapshots() {
 
         // set the order for our sections

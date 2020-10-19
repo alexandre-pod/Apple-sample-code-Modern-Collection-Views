@@ -72,6 +72,7 @@ extension EmojiExplorerListViewController {
         return UICollectionViewCompositionalLayout.list(using: configuration)
     }
     
+    /// - Tag: ValueCellConfiguration
     func configureDataSource() {
 
         // list cell

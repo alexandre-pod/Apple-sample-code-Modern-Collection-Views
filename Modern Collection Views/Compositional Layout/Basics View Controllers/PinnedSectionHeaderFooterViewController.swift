@@ -58,7 +58,6 @@ extension PinnedSectionHeaderFooterViewController {
 }
 
 extension PinnedSectionHeaderFooterViewController {
-    /// - Tag: PinnedHeaderRegister
     func configureHierarchy() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createLayout())
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -66,6 +65,7 @@ extension PinnedSectionHeaderFooterViewController {
         view.addSubview(collectionView)
         collectionView.delegate = self
     }
+    /// - Tag: PinnedHeaderRegistration
     func configureDataSource() {
         
         let cellRegistration = UICollectionView.CellRegistration<ListCell, Int> { (cell, indexPath, identifier) in

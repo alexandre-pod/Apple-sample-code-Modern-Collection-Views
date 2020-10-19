@@ -64,6 +64,7 @@ class ListAppearancesViewController: UIViewController {
 }
 
 extension ListAppearancesViewController {
+    /// - Tag: ListAppearances
     private func createLayout() -> UICollectionViewLayout {
         return UICollectionViewCompositionalLayout { [unowned self] section, layoutEnvironment in
             var config = UICollectionLayoutListConfiguration(appearance: self.appearance)

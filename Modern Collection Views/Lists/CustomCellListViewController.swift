@@ -86,8 +86,9 @@ extension CustomCellListViewController {
         view.addSubview(collectionView)
         collectionView.delegate = self
     }
+    
+    /// - Tag: CellRegistration
     private func configureDataSource() {
-        
         let cellRegistration = UICollectionView.CellRegistration<CustomListCell, Item> { (cell, indexPath, item) in
             cell.updateWithItem(item)
             cell.accessories = [.disclosureIndicator()]
@@ -195,6 +196,7 @@ private class CustomListCell: ItemListCell {
         separatorConstraint = constraint
     }
     
+    /// - Tag: UpdateConfiguration
     override func updateConfiguration(using state: UICellConfigurationState) {
         setupViewsIfNeeded()
         
