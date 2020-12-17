@@ -81,7 +81,7 @@ extension SectionHeadersFootersWindowController {
                 withIdentifier: TitleSupplementaryView.reuseIdentifier,
                 for: indexPath) as? TitleSupplementaryView {
                 let viewKind = kind == SectionHeadersFootersWindowController.sectionHeaderElementKind ?
-                    "Header" : "Footer"
+                    SectionHeadersFootersWindowController.sectionHeaderElementKind : SectionHeadersFootersWindowController.sectionFooterElementKind
                 supplementaryView.label.stringValue = "\(viewKind) for section \(indexPath.section)"
                 return supplementaryView
             } else {

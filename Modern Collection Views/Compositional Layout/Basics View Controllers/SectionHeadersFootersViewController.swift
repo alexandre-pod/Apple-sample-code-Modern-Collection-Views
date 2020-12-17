@@ -70,7 +70,7 @@ extension SectionHeadersFootersViewController {
         }
         
         let headerRegistration = UICollectionView.SupplementaryRegistration
-        <TitleSupplementaryView>(elementKind: "Header") {
+        <TitleSupplementaryView>(elementKind: SectionHeadersFootersViewController.sectionHeaderElementKind) {
             (supplementaryView, string, indexPath) in
             supplementaryView.label.text = "\(string) for section \(indexPath.section)"
             supplementaryView.backgroundColor = .lightGray
@@ -79,7 +79,7 @@ extension SectionHeadersFootersViewController {
         }
         
         let footerRegistration = UICollectionView.SupplementaryRegistration
-        <TitleSupplementaryView>(elementKind: "Footer") {
+        <TitleSupplementaryView>(elementKind: SectionHeadersFootersViewController.sectionFooterElementKind) {
             (supplementaryView, string, indexPath) in
             supplementaryView.label.text = "\(string) for section \(indexPath.section)"
             supplementaryView.backgroundColor = .lightGray

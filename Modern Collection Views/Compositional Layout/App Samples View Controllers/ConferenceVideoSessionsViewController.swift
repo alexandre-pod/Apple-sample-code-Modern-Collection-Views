@@ -94,7 +94,7 @@ extension ConferenceVideoSessionsViewController {
         }
         
         let supplementaryRegistration = UICollectionView.SupplementaryRegistration
-        <TitleSupplementaryView>(elementKind: "Footer") {
+        <TitleSupplementaryView>(elementKind: ConferenceVideoSessionsViewController.titleElementKind) {
             (supplementaryView, string, indexPath) in
             if let snapshot = self.currentSnapshot {
                 // Populate the view with our section's description.

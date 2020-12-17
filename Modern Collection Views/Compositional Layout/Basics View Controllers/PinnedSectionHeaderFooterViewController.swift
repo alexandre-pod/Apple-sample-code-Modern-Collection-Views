@@ -74,7 +74,7 @@ extension PinnedSectionHeaderFooterViewController {
         }
         
         let headerRegistration = UICollectionView.SupplementaryRegistration
-        <TitleSupplementaryView>(elementKind: "Header") {
+        <TitleSupplementaryView>(elementKind: PinnedSectionHeaderFooterViewController.sectionHeaderElementKind) {
             (supplementaryView, string, indexPath) in
             supplementaryView.label.text = "\(string) for section \(indexPath.section)"
             supplementaryView.backgroundColor = .lightGray
@@ -83,7 +83,7 @@ extension PinnedSectionHeaderFooterViewController {
         }
         
         let footerRegistration = UICollectionView.SupplementaryRegistration
-        <TitleSupplementaryView>(elementKind: "Footer") {
+        <TitleSupplementaryView>(elementKind: PinnedSectionHeaderFooterViewController.sectionFooterElementKind) {
             (supplementaryView, string, indexPath) in
             supplementaryView.label.text = "\(string) for section \(indexPath.section)"
             supplementaryView.backgroundColor = .lightGray

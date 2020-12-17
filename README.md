@@ -179,7 +179,7 @@ The example uses supplementary registrations for the header and footer to config
 
 ``` swift
 let headerRegistration = UICollectionView.SupplementaryRegistration
-<TitleSupplementaryView>(elementKind: "Header") {
+<TitleSupplementaryView>(elementKind: SectionHeadersFootersViewController.sectionHeaderElementKind) {
     (supplementaryView, string, indexPath) in
     supplementaryView.label.text = "\(string) for section \(indexPath.section)"
     supplementaryView.backgroundColor = .lightGray
@@ -317,16 +317,7 @@ func orthogonalScrollingBehavior() -> UICollectionLayoutSectionOrthogonalScrolli
 
 The Mountains Search example shows how to update the data and the user interface in a collection view when a user filters the data. It shows a list of mountain names, and allows the user to type text into a search bar to filter based on the mountain names.
 
-This collection view, `mountainsCollectionView`, contains a single section with items created from a list of raw data about each mountain. This example encapsulates each piece of that data in a `Mountain` structure, defined in `MountainsController`. To manage the data, this example uses a diffable data source that contains a single section and items of type `Mountain`. When that diffable data source is created, it connects to `mountainsCollectionView`. To dequeue cells for display in the collection view, the diffable data source uses a cell registration. The cell registration configures cells of type `LabelCell` to display the name of a mountain. 
-
-``` swift
-dataSource = UICollectionViewDiffableDataSource<Section, MountainsController.Mountain>(collectionView: mountainsCollectionView) {
-    (collectionView: UICollectionView, indexPath: IndexPath, identifier: MountainsController.Mountain) -> UICollectionViewCell? in
-    // Return the cell.
-    return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: identifier)
-}
-```
-[View in Source](x-source-tag://MountainsPerformQuery)
+This collection view, `mountainsCollectionView`, contains a single section with items created from a list of raw data about each mountain. This example encapsulates each piece of that data in a `Mountain` structure, defined in `MountainsController`. To manage the data, this example uses a diffable data source that contains a single section and items of type `Mountain`. When that diffable data source is created, it connects to `mountainsCollectionView` and registers a cell type of `LabelCell` to display the name of the mountain in the collection view. Then, it configures that cell with the name of the mountain.
 
 The [`performQuery(with:)`](x-source-tag://MountainsPerformQuery) method updates the data and the user interface. The method takes the currently typed filter text and generates a list of mountains that contain that text in their names. Then, it constructs a representation of the newly filtered data using a snapshot. The snapshot contains the same single section as before, but now, instead of containing items representing every mountain, it only contains the filtered mountains.
 
@@ -429,7 +420,7 @@ var content = defaultListContentConfiguration().updated(for: state)
 ```
 [View in Source](x-source-tag://UpdateConfiguration)
     
-Then, it customizes the configuration's values and assigns that configuration to the [`configuration`](https://developer.apple.com/documentation/uikit/uilistcontentview/3601053-configuration) property of `listContentView`. 
+Then, it customizes the configuration's values and assigns that configuration to the [`configuration`](https://developer.apple.com/documentation/uikit/uilistcontentview/3600552-configuration) property of `listContentView`. 
 
 For the image view and label, the [`updateConfiguration(using:)`](x-source-tag://UpdateConfiguration) method fetches a default value cell configuration for the current state and stores it in `valueConfiguration`. It copies the preconfigured default styling and metrics from this configuration into the custom views to ensure consistency with the system styles.
 

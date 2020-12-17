@@ -132,7 +132,7 @@ extension OrthogonalScrollBehaviorViewController {
         }
         
         let supplementaryRegistration = UICollectionView.SupplementaryRegistration
-        <TitleSupplementaryView>(elementKind: "Footer") {
+        <TitleSupplementaryView>(elementKind: OrthogonalScrollBehaviorViewController.headerElementKind) {
             (supplementaryView, string, indexPath) in
             let sectionKind = SectionKind(rawValue: indexPath.section)!
             supplementaryView.label.text = "." + String(describing: sectionKind)
