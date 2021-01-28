@@ -170,7 +170,7 @@ extension EmojiExplorerViewController {
         return UISwipeActionsConfiguration(actions: [starAction])
     }
     
-    func configuredGridCell() -> UICollectionView.CellRegistration<UICollectionViewCell, Emoji> {
+    func createGridCellRegistration() -> UICollectionView.CellRegistration<UICollectionViewCell, Emoji> {
         return UICollectionView.CellRegistration<UICollectionViewCell, Emoji> { (cell, indexPath, emoji) in
             var content = UIListContentConfiguration.cell()
             content.text = emoji.text
@@ -186,7 +186,7 @@ extension EmojiExplorerViewController {
         }
     }
     
-    func configuredOutlineHeaderCell() -> UICollectionView.CellRegistration<UICollectionViewListCell, String> {
+    func createOutlineHeaderCellRegistration() -> UICollectionView.CellRegistration<UICollectionViewListCell, String> {
         return UICollectionView.CellRegistration<UICollectionViewListCell, String> { (cell, indexPath, title) in
             var content = cell.defaultContentConfiguration()
             content.text = title
@@ -195,7 +195,7 @@ extension EmojiExplorerViewController {
         }
     }
     
-    func configuredOutlineCell() -> UICollectionView.CellRegistration<UICollectionViewListCell, Emoji> {
+    func createOutlineCellRegistration() -> UICollectionView.CellRegistration<UICollectionViewListCell, Emoji> {
         return UICollectionView.CellRegistration<UICollectionViewListCell, Emoji> { (cell, indexPath, emoji) in
             var content = cell.defaultContentConfiguration()
             content.text = emoji.text
@@ -206,7 +206,7 @@ extension EmojiExplorerViewController {
     }
     
     /// - Tag: ConfigureListCell
-    func configuredListCell() -> UICollectionView.CellRegistration<UICollectionViewListCell, Item> {
+    func createListCellRegistration() -> UICollectionView.CellRegistration<UICollectionViewListCell, Item> {
         return UICollectionView.CellRegistration<UICollectionViewListCell, Item> { [weak self] (cell, indexPath, item) in
             guard let self = self, let emoji = item.emoji else { return }
             var content = UIListContentConfiguration.valueCell()
@@ -219,20 +219,26 @@ extension EmojiExplorerViewController {
     
     /// - Tag: DequeueCells
     func configureDataSource() {
+        // create registrations up front, then choose the appropriate one to use in the cell provider
+        let gridCellRegistration = createGridCellRegistration()
+        let listCellRegistration = createListCellRegistration()
+        let outlineHeaderCellRegistration = createOutlineHeaderCellRegistration()
+        let outlineCellRegistration = createOutlineCellRegistration()
+        
         // data source
         dataSource = UICollectionViewDiffableDataSource<Section, Item>(collectionView: collectionView) {
             (collectionView, indexPath, item) -> UICollectionViewCell? in
             guard let section = Section(rawValue: indexPath.section) else { fatalError("Unknown section") }
             switch section {
             case .recents:
-                return collectionView.dequeueConfiguredReusableCell(using: self.configuredGridCell(), for: indexPath, item: item.emoji)
+                return collectionView.dequeueConfiguredReusableCell(using: gridCellRegistration, for: indexPath, item: item.emoji)
             case .list:
-                return collectionView.dequeueConfiguredReusableCell(using: self.configuredListCell(), for: indexPath, item: item)
+                return collectionView.dequeueConfiguredReusableCell(using: listCellRegistration, for: indexPath, item: item)
             case .outline:
                 if item.hasChildren {
-                    return collectionView.dequeueConfiguredReusableCell(using: self.configuredOutlineHeaderCell(), for: indexPath, item: item.title!)
+                    return collectionView.dequeueConfiguredReusableCell(using: outlineHeaderCellRegistration, for: indexPath, item: item.title!)
                 } else {
-                    return collectionView.dequeueConfiguredReusableCell(using: self.configuredOutlineCell(), for: indexPath, item: item.emoji)
+                    return collectionView.dequeueConfiguredReusableCell(using: outlineCellRegistration, for: indexPath, item: item.emoji)
                 }
             }
         }

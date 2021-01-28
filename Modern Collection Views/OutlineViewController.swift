@@ -132,7 +132,7 @@ extension OutlineViewController {
             cell.contentConfiguration = contentConfiguration
             
             let disclosureOptions = UICellAccessory.OutlineDisclosureOptions(style: .header)
-            cell.accessories = [.outlineDisclosure(options:disclosureOptions)]
+            cell.accessories = [.outlineDisclosure(options: disclosureOptions)]
             cell.backgroundConfiguration = UIBackgroundConfiguration.clear()
         }
         

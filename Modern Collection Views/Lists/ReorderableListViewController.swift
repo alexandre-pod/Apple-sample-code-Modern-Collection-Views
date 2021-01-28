@@ -133,7 +133,7 @@ extension ReorderableListViewController {
             contentConfiguration.secondaryText = String(describing: emoji.category)
             cell.contentConfiguration = contentConfiguration
             
-            cell.accessories = [.disclosureIndicator(), .reorder(displayed:.always)]
+            cell.accessories = [.disclosureIndicator(), .reorder(displayed: .always)]
         }
         
         // data source

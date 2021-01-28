@@ -484,14 +484,14 @@ Each section has a corresponding cell registration to configure its own type of 
 ``` swift
 switch section {
 case .recents:
-    return collectionView.dequeueConfiguredReusableCell(using: self.configuredGridCell(), for: indexPath, item: item.emoji)
+    return collectionView.dequeueConfiguredReusableCell(using: gridCellRegistration, for: indexPath, item: item.emoji)
 case .list:
-    return collectionView.dequeueConfiguredReusableCell(using: self.configuredListCell(), for: indexPath, item: item)
+    return collectionView.dequeueConfiguredReusableCell(using: listCellRegistration, for: indexPath, item: item)
 case .outline:
     if item.hasChildren {
-        return collectionView.dequeueConfiguredReusableCell(using: self.configuredOutlineHeaderCell(), for: indexPath, item: item.title!)
+        return collectionView.dequeueConfiguredReusableCell(using: outlineHeaderCellRegistration, for: indexPath, item: item.title!)
     } else {
-        return collectionView.dequeueConfiguredReusableCell(using: self.configuredOutlineCell(), for: indexPath, item: item.emoji)
+        return collectionView.dequeueConfiguredReusableCell(using: outlineCellRegistration, for: indexPath, item: item.emoji)
     }
 }
 ```
