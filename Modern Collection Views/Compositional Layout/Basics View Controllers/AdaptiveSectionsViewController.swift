@@ -6,6 +6,7 @@ A layout that adapts to a changing layout environment
 */
 
 import UIKit
+import CompositionalLayoutDSL
 
 class AdaptiveSectionsViewController: UIViewController {
 
@@ -40,6 +41,22 @@ class AdaptiveSectionsViewController: UIViewController {
 extension AdaptiveSectionsViewController {
     /// - Tag: Adaptive
     func createLayout() -> UICollectionViewLayout {
+        return LayoutBuilder {
+            CompositionalLayout { sectionIndex, layoutEnvironment in
+                guard let layoutKind = SectionLayoutKind(rawValue: sectionIndex) else { return nil }
+                let columns = layoutKind.columnCount(for: layoutEnvironment.container.effectiveContentSize.width)
+                return Section {
+                    HGroup(count: columns) {
+                        Item()
+                            .contentInsets(value: 2)
+                    }
+                    .height(layoutKind == .list ? .absolute(44) : .fractionalWidth(0.2))
+                }
+                .contentInsets(value: 20)
+            }
+        }
+    }
+    func createLayoutOld() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout {
             (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
             guard let layoutKind = SectionLayoutKind(rawValue: sectionIndex) else { return nil }

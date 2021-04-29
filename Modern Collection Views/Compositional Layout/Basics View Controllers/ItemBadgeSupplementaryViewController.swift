@@ -6,6 +6,7 @@ Shows how to use NSCollectionLayoutSupplementaryItems to badge items
 */
 
 import UIKit
+import CompositionalLayoutDSL
 
 class ItemBadgeSupplementaryViewController: UIViewController {
 
@@ -39,6 +40,24 @@ class ItemBadgeSupplementaryViewController: UIViewController {
 extension ItemBadgeSupplementaryViewController {
     /// - Tag: Badge
     func createLayout() -> UICollectionViewLayout {
+        return LayoutBuilder {
+            CompositionalLayoutDSL.Section {
+                HGroup {
+                    Item {
+                        SupplementaryItem(elementKind: ItemBadgeSupplementaryViewController.badgeElementKind)
+                            .width(.absolute(20))
+                            .height(.absolute(20))
+                            .containerAnchor(edges: [.top, .trailing], offset: .fractional(x: 0.3, y: -0.3))
+                    }
+                    .width(.fractionalWidth(0.25))
+                    .contentInsets(value: 5)
+                }
+                .height(.fractionalWidth(0.2))
+            }
+            .contentInsets(value: 20)
+        }
+    }
+    func createLayoutOld() -> UICollectionViewLayout {
         let badgeAnchor = NSCollectionLayoutAnchor(edges: [.top, .trailing], fractionalOffset: CGPoint(x: 0.3, y: -0.3))
         let badgeSize = NSCollectionLayoutSize(widthDimension: .absolute(20),
                                               heightDimension: .absolute(20))

@@ -6,6 +6,7 @@ Orthogonal scrolling section example
 */
 
 import UIKit
+import CompositionalLayoutDSL
 
 class OrthogonalScrollingViewController: UIViewController {
 
@@ -42,6 +43,25 @@ extension OrthogonalScrollingViewController {
 
     /// - Tag: Orthogonal
     func createLayout() -> UICollectionViewLayout {
+        return LayoutBuilder {
+            Section {
+                HGroup {
+                    Item()
+                        .width(.fractionalWidth(0.7))
+                        .contentInsets(value: 10)
+                    VGroup(count: 2) {
+                        Item()
+                            .contentInsets(value: 10)
+                    }
+                    .width(.fractionalWidth(0.3))
+                }
+                .height(.fractionalHeight(0.4))
+                .width(.fractionalWidth(0.85))
+            }
+            .orthogonalScrollingBehavior(.continuous)
+        }
+    }
+    func createLayoutOld() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout {
             (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
 

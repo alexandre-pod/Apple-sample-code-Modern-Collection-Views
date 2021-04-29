@@ -58,6 +58,8 @@
 		5777C885229910E100AEF7BB /* MountainsRawData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5777C884229910E100AEF7BB /* MountainsRawData.swift */; };
 		57F0E355247D8C4100821591 /* SimpleListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F0E354247D8C4100821591 /* SimpleListViewController.swift */; };
 		67AD57CC248ACDAF00D9E73E /* EmojiDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67AD57CB248ACDAF00D9E73E /* EmojiDetailViewController.swift */; };
+		ACE244D9263ADC3500483284 /* CompositionalLayoutDSL in Frameworks */ = {isa = PBXBuildFile; productRef = ACE244D8263ADC3500483284 /* CompositionalLayoutDSL */; };
+		ACE244DB263ADC5E00483284 /* CompositionalLayoutDSL in Frameworks */ = {isa = PBXBuildFile; productRef = ACE244DA263ADC5E00483284 /* CompositionalLayoutDSL */; };
 		FD000CBA22F0E68100AE3B95 /* TableViewEditingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD000CB922F0E68100AE3B95 /* TableViewEditingViewController.swift */; };
 		FD002CD024A38A28004178C8 /* ReorderableListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD002CCF24A38A28004178C8 /* ReorderableListViewController.swift */; };
 		FD09E6D42276BC250009D23B /* SectionHeadersFootersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD09E6D32276BC250009D23B /* SectionHeadersFootersViewController.swift */; };
@@ -154,10 +156,10 @@
 		37B1C17124A2E6660041C9F6 /* CustomConfigurationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomConfigurationViewController.swift; sourceTree = "<group>"; };
 		5777C884229910E100AEF7BB /* MountainsRawData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MountainsRawData.swift; sourceTree = "<group>"; };
 		57F0E354247D8C4100821591 /* SimpleListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleListViewController.swift; sourceTree = "<group>"; };
-		5AEBA7C0AB13D40C88941D7F /* SampleCode.xcconfig */ = {isa = PBXFileReference; name = SampleCode.xcconfig; path = Configuration/SampleCode.xcconfig; sourceTree = "<group>"; };
+		5AEBA7C0AB13D40C88941D7F /* SampleCode.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = SampleCode.xcconfig; path = Configuration/SampleCode.xcconfig; sourceTree = "<group>"; };
 		67AD57CB248ACDAF00D9E73E /* EmojiDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiDetailViewController.swift; sourceTree = "<group>"; };
 		699CA3DA2383663700B50951 /* Modern Collection Views.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Modern Collection Views.entitlements"; sourceTree = "<group>"; };
-		85AA89463B64A375ADFAD7E9 /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE.txt; sourceTree = "<group>"; };
+		85AA89463B64A375ADFAD7E9 /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		FD000CB922F0E68100AE3B95 /* TableViewEditingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewEditingViewController.swift; sourceTree = "<group>"; };
 		FD002CCF24A38A28004178C8 /* ReorderableListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReorderableListViewController.swift; sourceTree = "<group>"; };
 		FD09E6D32276BC250009D23B /* SectionHeadersFootersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeadersFootersViewController.swift; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ACE244DB263ADC5E00483284 /* CompositionalLayoutDSL in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -218,6 +221,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ACE244D9263ADC3500483284 /* CompositionalLayoutDSL in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,7 +350,6 @@
 			children = (
 				85AA89463B64A375ADFAD7E9 /* LICENSE.txt */,
 			);
-			name = LICENSE;
 			path = LICENSE;
 			sourceTree = "<group>";
 		};
@@ -533,6 +536,9 @@
 			dependencies = (
 			);
 			name = "Modern Collection Views Mac";
+			packageProductDependencies = (
+				ACE244DA263ADC5E00483284 /* CompositionalLayoutDSL */,
+			);
 			productName = "WWDC-Mac-Diffable";
 			productReference = 053A00A722837E6E00C5D56F /* Modern Collection Views Mac.app */;
 			productType = "com.apple.product-type.application";
@@ -550,6 +556,9 @@
 			dependencies = (
 			);
 			name = "Modern Collection Views";
+			packageProductDependencies = (
+				ACE244D8263ADC3500483284 /* CompositionalLayoutDSL */,
+			);
 			productName = "WWDC-Diffable";
 			productReference = FDA8D137225F8531000127E1 /* Modern Collection Views.app */;
 			productType = "com.apple.product-type.application";
@@ -582,6 +591,9 @@
 				Base,
 			);
 			mainGroup = FDA8D12E225F8531000127E1;
+			packageReferences = (
+				ACE244D7263ADC3500483284 /* XCRemoteSwiftPackageReference "CompositionalLayoutDSL" */,
+			);
 			productRefGroup = FDA8D138225F8531000127E1 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -995,6 +1007,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		ACE244D7263ADC3500483284 /* XCRemoteSwiftPackageReference "CompositionalLayoutDSL" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:faberNovel/CompositionalLayoutDSL.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		ACE244D8263ADC3500483284 /* CompositionalLayoutDSL */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ACE244D7263ADC3500483284 /* XCRemoteSwiftPackageReference "CompositionalLayoutDSL" */;
+			productName = CompositionalLayoutDSL;
+		};
+		ACE244DA263ADC5E00483284 /* CompositionalLayoutDSL */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ACE244D7263ADC3500483284 /* XCRemoteSwiftPackageReference "CompositionalLayoutDSL" */;
+			productName = CompositionalLayoutDSL;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = FDA8D12F225F8531000127E1 /* Project object */;
 }

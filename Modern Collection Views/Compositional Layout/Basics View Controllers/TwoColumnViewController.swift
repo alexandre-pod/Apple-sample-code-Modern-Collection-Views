@@ -6,6 +6,7 @@ A two column grid described by compositional layout
 */
 
 import UIKit
+import CompositionalLayoutDSL
 
 class TwoColumnViewController: UIViewController {
 
@@ -27,6 +28,19 @@ class TwoColumnViewController: UIViewController {
 extension TwoColumnViewController {
     /// - Tag: TwoColumn
     func createLayout() -> UICollectionViewLayout {
+        return LayoutBuilder {
+            CompositionalLayoutDSL.Section {
+                HGroup(count: 2) {
+                    Item()
+                }
+                .height(.absolute(44))
+                .interItemSpacing(.fixed(10))
+            }
+            .interGroupSpacing(10)
+            .contentInsets(horizontal: 10)
+        }
+    }
+    func createLayoutOld() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                              heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)

@@ -6,6 +6,7 @@ Pinned sction headers example
 */
 
 import UIKit
+import CompositionalLayoutDSL
 
 class PinnedSectionHeaderFooterViewController: UIViewController {
 
@@ -26,6 +27,33 @@ class PinnedSectionHeaderFooterViewController: UIViewController {
 extension PinnedSectionHeaderFooterViewController {
     /// - Tag: PinnedHeader
     func createLayout() -> UICollectionViewLayout {
+        return LayoutBuilder {
+            CompositionalLayout { _, _ in
+                Section {
+                    HGroup {
+                        Item()
+                    }
+                    .height(.absolute(44))
+                }
+                .boundarySupplementaryItems {
+                    BoundarySupplementaryItem(
+                        elementKind: PinnedSectionHeaderFooterViewController.sectionHeaderElementKind
+                    )
+                    .height(.estimated(44))
+                    .alignment(.top)
+                    .pinToVisibleBounds(true)
+                    .zIndex(zIndex: 2)
+                    BoundarySupplementaryItem(
+                        elementKind: PinnedSectionHeaderFooterViewController.sectionFooterElementKind
+                    )
+                    .height(.estimated(44))
+                    .alignment(.bottom)
+                }
+            }
+        }
+    }
+
+    func createLayoutOld() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                              heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)

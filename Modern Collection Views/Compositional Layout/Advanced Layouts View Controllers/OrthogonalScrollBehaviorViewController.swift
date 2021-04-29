@@ -6,6 +6,7 @@ Orthogonal scrolling section behaviors example
 */
 
 import UIKit
+import CompositionalLayoutDSL
 
 class OrthogonalScrollBehaviorViewController: UIViewController {
     static let headerElementKind = "header-element-kind"
@@ -62,6 +63,34 @@ extension OrthogonalScrollBehaviorViewController {
     //   +-----------------------------------------------------+
 
     func createLayout() -> UICollectionViewLayout {
+        return LayoutBuilder {
+            CompositionalLayout { sectionIndex, _ in
+                guard let sectionKind = SectionKind(rawValue: sectionIndex) else { fatalError("unknown section kind") }
+                return Section {
+                    HGroup {
+                        Item()
+                            .width(.fractionalWidth(0.7))
+                            .contentInsets(value: 10)
+                        VGroup(count: 2) {
+                            Item()
+                                .contentInsets(value: 10)
+                        }
+                        .width(.fractionalWidth(0.3))
+                    }
+                    .height(.fractionalHeight(0.4))
+                    .width(.fractionalWidth(sectionKind.orthogonalScrollingBehavior() != .none ? 0.85 : 1.0))
+                }
+                .orthogonalScrollingBehavior(sectionKind.orthogonalScrollingBehavior())
+                .boundarySupplementaryItems {
+                    BoundarySupplementaryItem(elementKind: OrthogonalScrollBehaviorViewController.headerElementKind)
+                        .height(.estimated(44))
+                }
+            }
+            .interSectionSpacing(20)
+        }
+    }
+
+    func createLayoutOld() -> UICollectionViewLayout {
 
         let config = UICollectionViewCompositionalLayoutConfiguration()
         config.interSectionSpacing = 20

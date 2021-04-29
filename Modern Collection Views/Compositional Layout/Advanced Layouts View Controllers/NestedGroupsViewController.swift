@@ -6,6 +6,7 @@ Nested NSCollectionLayoutGroup example
 */
 
 import UIKit
+import CompositionalLayoutDSL
 
 class NestedGroupsViewController: UIViewController {
 
@@ -46,6 +47,23 @@ extension NestedGroupsViewController {
 
     /// - Tag: Nested
     func createLayout() -> UICollectionViewLayout {
+        return LayoutBuilder {
+            CompositionalLayoutDSL.Section {
+                HGroup {
+                    Item()
+                        .width(.fractionalWidth(0.7))
+                        .contentInsets(value: 10)
+                    VGroup(count: 2) {
+                        Item()
+                            .contentInsets(value: 10)
+                    }
+                    .width(.fractionalWidth(0.3))
+                }
+                .height(.fractionalHeight(0.4))
+            }
+        }
+    }
+    func createLayoutOld() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout {
             (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
 

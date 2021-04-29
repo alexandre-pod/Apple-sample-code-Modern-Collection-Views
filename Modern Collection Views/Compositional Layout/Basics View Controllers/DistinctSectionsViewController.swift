@@ -6,6 +6,7 @@ Per-section specific layout example
 */
 
 import UIKit
+import CompositionalLayoutDSL
 
 class DistinctSectionsViewController: UIViewController {
 
@@ -39,6 +40,21 @@ class DistinctSectionsViewController: UIViewController {
 extension DistinctSectionsViewController {
     /// - Tag: PerSection
     func createLayout() -> UICollectionViewLayout {
+        return LayoutBuilder {
+            CompositionalLayout { sectionIndex, _ in
+                guard let sectionLayoutKind = SectionLayoutKind(rawValue: sectionIndex) else { return nil }
+                return Section {
+                    HGroup(count: sectionLayoutKind.columnCount) {
+                        Item()
+                            .contentInsets(value: 2)
+                    }
+                    .height(sectionLayoutKind.columnCount == 1 ? .absolute(44) : .fractionalWidth(0.2))
+                }
+                .contentInsets(value: 20)
+            }
+        }
+    }
+    func createLayoutOld() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int,
             layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
 

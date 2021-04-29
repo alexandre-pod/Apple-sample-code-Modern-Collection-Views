@@ -6,6 +6,7 @@ Sample showing how we might build the videos sessions UI
 */
 
 import UIKit
+import CompositionalLayoutDSL
 
 class ConferenceVideoSessionsViewController: UIViewController {
 
@@ -27,6 +28,32 @@ class ConferenceVideoSessionsViewController: UIViewController {
 
 extension ConferenceVideoSessionsViewController {
     func createLayout() -> UICollectionViewLayout {
+        return LayoutBuilder {
+            CompositionalLayout { _, layoutEnvironment in
+                Section {
+                    HGroup {
+                        Item()
+                    }
+                    .width(.fractionalWidth(
+                        // if we have the space, adapt and go 2-up + peeking 3rd item
+                        layoutEnvironment.container.effectiveContentSize.width > 500
+                            ? 0.425
+                            : 0.85
+                    ))
+                    .height(.absolute(250))
+                }
+                .interGroupSpacing(20)
+                .contentInsets(horizontal: 20, vertical: 0)
+                .orthogonalScrollingBehavior(.continuous)
+                .boundarySupplementaryItems {
+                    BoundarySupplementaryItem(elementKind: ConferenceVideoSessionsViewController.titleElementKind)
+                        .height(.estimated(44))
+                }
+            }
+            .interSectionSpacing(20)
+        }
+    }
+    func createLayoutOld() -> UICollectionViewLayout {
         let sectionProvider = { (sectionIndex: Int,
             layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),

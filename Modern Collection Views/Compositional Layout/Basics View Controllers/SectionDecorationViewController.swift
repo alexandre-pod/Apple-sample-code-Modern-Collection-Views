@@ -6,6 +6,7 @@ Section background decoration view example
 */
 
 import UIKit
+import CompositionalLayoutDSL
 
 class SectionDecorationViewController: UIViewController {
 
@@ -26,6 +27,28 @@ class SectionDecorationViewController: UIViewController {
 extension SectionDecorationViewController {
     /// - Tag: Background
     func createLayout() -> UICollectionViewLayout {
+        let layout = LayoutBuilder {
+            CompositionalLayout { _, _ in
+                Section {
+                    HGroup {
+                        Item()
+                    }
+                    .height(.absolute(44))
+                }
+                .interGroupSpacing(5)
+                .contentInsets(value: 10)
+                .decorationItems {
+                    DecorationItem(elementKind: SectionDecorationViewController.sectionBackgroundDecorationElementKind)
+                        .contentInsets(value: 5)
+                }
+            }
+        }
+        layout.register(
+            SectionBackgroundDecorationView.self,
+            forDecorationViewOfKind: SectionDecorationViewController.sectionBackgroundDecorationElementKind)
+        return layout
+    }
+    func createLayoutOld() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                              heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)

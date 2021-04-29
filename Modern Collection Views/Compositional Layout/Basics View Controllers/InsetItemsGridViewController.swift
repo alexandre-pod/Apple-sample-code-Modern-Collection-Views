@@ -6,6 +6,7 @@ A list with inset item content described by compositional layout
 */
 
 import UIKit
+import CompositionalLayoutDSL
 
 class InsetItemsGridViewController: UIViewController {
 
@@ -27,6 +28,17 @@ class InsetItemsGridViewController: UIViewController {
 extension InsetItemsGridViewController {
     /// - Tag: Inset
     func createLayout() -> UICollectionViewLayout {
+        return LayoutBuilder {
+            CompositionalLayoutDSL.Section {
+                HGroup {
+                    Item(width: .fractionalWidth(0.2))
+                        .contentInsets(value: 5)
+                }
+                .height(.fractionalWidth(0.2))
+            }
+        }
+    }
+    func createLayoutOld() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.2),
                                              heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)

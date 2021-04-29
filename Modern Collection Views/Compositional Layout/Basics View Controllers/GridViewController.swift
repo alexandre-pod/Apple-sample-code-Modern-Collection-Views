@@ -6,6 +6,7 @@ A basic grid described by compositional layout
 */
 
 import UIKit
+import CompositionalLayoutDSL
 
 class GridViewController: UIViewController {
 
@@ -27,6 +28,16 @@ class GridViewController: UIViewController {
 extension GridViewController {
     /// - Tag: Grid
     private func createLayout() -> UICollectionViewLayout {
+        return LayoutBuilder {
+            CompositionalLayoutDSL.Section {
+                HGroup {
+                    Item(width: .fractionalWidth(0.2))
+                }
+                .height(.fractionalWidth(0.2))
+            }
+        }
+    }
+    private func createLayoutOld() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.2),
                                              heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)

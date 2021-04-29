@@ -6,6 +6,7 @@ Sample showing how we might build the news feed UI
 */
 
 import UIKit
+import CompositionalLayoutDSL
 
 class ConferenceNewsFeedViewController: UIViewController {
 
@@ -69,6 +70,19 @@ extension ConferenceNewsFeedViewController {
     }
 
     func createLayout() -> UICollectionViewLayout {
+        return LayoutBuilder {
+            CompositionalLayoutDSL.Section {
+                HGroup {
+                    Item(height: .estimated(100))
+                }
+                .height(.estimated(100))
+            }
+            .interGroupSpacing(10)
+            .contentInsets(value: 10)
+        }
+    }
+
+    func createLayoutOld() -> UICollectionViewLayout {
         let estimatedHeight = CGFloat(100)
         let layoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                heightDimension: .estimated(estimatedHeight))

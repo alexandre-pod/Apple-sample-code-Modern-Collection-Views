@@ -6,6 +6,7 @@ Section headers and footers example
 */
 
 import UIKit
+import CompositionalLayoutDSL
 
 class SectionHeadersFootersViewController: UIViewController {
 
@@ -26,6 +27,26 @@ class SectionHeadersFootersViewController: UIViewController {
 extension SectionHeadersFootersViewController {
     /// - Tag: HeaderFooter
     func createLayout() -> UICollectionViewLayout {
+        return LayoutBuilder {
+            Section {
+                HGroup {
+                    Item()
+                }
+                .height(.absolute(44))
+            }
+            .interGroupSpacing(5)
+            .contentInsets(horizontal: 10, vertical: 0)
+            .boundarySupplementaryItems {
+                BoundarySupplementaryItem(elementKind: SectionHeadersFootersViewController.sectionHeaderElementKind)
+                    .height(.estimated(44))
+                    .alignment(.top)
+                BoundarySupplementaryItem(elementKind: SectionHeadersFootersViewController.sectionFooterElementKind)
+                    .height(.estimated(44))
+                    .alignment(.bottom)
+            }
+        }
+    }
+    func createLayoutOld() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                              heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
